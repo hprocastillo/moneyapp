@@ -3,6 +3,7 @@
 
 <form [formGroup]="expenseForm" (ngSubmit)="submit()">
 
+  <!-- DESCRIPTION -->
   <div class="form-floating mb-3">
     <input
       type="text"
@@ -14,6 +15,7 @@
     <label for="expenseDescription">Descripción</label>
   </div>
 
+  <!-- AMOUNT -->
   <div class="form-floating mb-3">
     <input
       type="number"
@@ -25,8 +27,9 @@
     <label for="expenseAmount">Monto</label>
   </div>
 
-  <div class="form-floating">
-    <select class="form-select" id="expensePayment" aria-label="Floating label select example">
+  <!-- PAYMENT METHOD -->
+  <div class="form-floating mb-3">
+    <select class="form-select" id="expensePayment" formControlName="paymentMethod">
       <option selected>Seleccionar</option>
       <option value="EFECTIVO">EFECTIVO</option>
       <option value="TRANSFERENCIA">TRANSFERENCIA</option>
@@ -36,20 +39,37 @@
     <label for="expensePayment">Metodo de pago</label>
   </div>
 
+  <!-- RECEIPT PHOTO -->
+  <div class="mb-3">
+    <!-- INPUT FILE -->
+    <input
+      type="file"
+      accept="image/*"
+      capture="environment"
+      hidden
+      #fileInput
+      (change)="onFileSelected($event)"
+    />
+    <button type="button" (click)="fileInput.click()">
+      <i class="fa-solid fa-camera"></i> Tomar Foto
+    </button>
 
-  <input formControlName="receiptUrl" placeholder="URL del comprobante"/>
-  <select formControlName="paymentMethod">
-    <option value="EFECTIVO">Efectivo</option>
-    <option value="TARJETA">Tarjeta</option>
-    <option value="YAPE">Yape</option>
-  </select>
-  <button type="submit">Guardar</button>
-</form>
-
-
-<div class="row fixed-bottom p-3">
-  <div class="col-12 d-flex justify-content-between">
-    <app-btn-cancel></app-btn-cancel>
-    <app-btn-save></app-btn-save>
+    <!-- PREVIEW -->
+    <div *ngIf="imagePreviewUrl" class="preview">
+      <img [src]="imagePreviewUrl" alt="Foto recibo" width="120"/>
+    </div>
   </div>
-</div>
+
+
+  <div class="row fixed-bottom p-3">
+    <div class="col-12 d-flex justify-content-between">
+      <button type="reset" class="btn btn-danger rounded-circle p-3" (click)="cancel()">
+        <i class="fa-solid fa-xmark fa-2xl"></i>
+      </button>
+
+      <button type="submit" class="btn btn-success rounded-circle p-3">
+        <i class="fa-solid fa-floppy-disk fa-2xl"></i>
+      </button>
+    </div>
+  </div>
+</form>
