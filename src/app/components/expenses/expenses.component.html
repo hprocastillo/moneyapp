@@ -1,0 +1,17 @@
+@switch (template) {
+  @case ("LIST"){
+    <app-expenses-list></app-expenses-list>
+  }
+  @case ("NEW"){
+    <app-expenses-new></app-expenses-new>
+  }
+  @case ("EDIT"){
+    <app-expenses-edit></app-expenses-edit>
+  }
+  @case ("VIEW"){
+    <app-expenses-view></app-expenses-view>
+  }
+  @default {
+    <app-expenses-list></app-expenses-list>
+  }
+}
