@@ -1,5 +1,4 @@
-<h5 class="mb-0">Nuevo Gasto</h5>
-<hr class="text-muted m-0">
+<app-title [title]="'nuevo gasto'"></app-title>
 
 <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
 
@@ -11,44 +10,54 @@
       id="expenseDescription"
       placeholder="Descripción"
       formControlName="description"
+      (keydown.enter)="$event.preventDefault()"
     >
     <label for="expenseDescription">Descripción</label>
   </div>
 
-  <!-- AMOUNT -->
-  <div class="form-floating mb-3">
-    <input
-      type="number"
-      class="form-control"
-      id="expenseAmount"
-      placeholder="Monto"
-      formControlName="amount"
-    >
-    <label for="expenseAmount">Monto</label>
+
+  <div class="row mb-3">
+    <!-- AMOUNT -->
+    <div class="col-5 pe-0">
+      <div class="form-floating">
+        <input
+          type="number"
+          class="form-control"
+          id="expenseAmount"
+          placeholder="Monto S/."
+          formControlName="amount"
+          (keydown.enter)="$event.preventDefault()"
+        >
+        <label for="expenseAmount">Monto S/.</label>
+      </div>
+    </div>
+    <!-- PAYMENT METHOD -->
+    <div class="col-7">
+      <div class="form-floating">
+        <select class="form-select" id="expensePayment" formControlName="paymentMethod">
+          <option selected>Seleccionar</option>
+          <option value="EFECTIVO">EFECTIVO</option>
+          <option value="TRANSFERENCIA">TRANSFERENCIA</option>
+          <option value="TARJETA">TARJETA</option>
+          <option value="YAPE">YAPE</option>
+        </select>
+        <label for="expensePayment">Metodo de pago</label>
+      </div>
+    </div>
   </div>
 
-  <!-- PAYMENT METHOD -->
-  <div class="form-floating mb-3">
-    <select class="form-select" id="expensePayment" formControlName="paymentMethod">
-      <option selected>Seleccionar</option>
-      <option value="EFECTIVO">EFECTIVO</option>
-      <option value="TRANSFERENCIA">TRANSFERENCIA</option>
-      <option value="TARJETA">TARJETA</option>
-      <option value="YAPE">YAPE</option>
-    </select>
-    <label for="expensePayment">Metodo de pago</label>
-  </div>
 
   <!-- COMMENTS -->
-  <div class="form-floating mb-5">
-    <input
-      type="text"
-      class="form-control"
-      id="expenseComments"
-      placeholder="Observaciones"
-      formControlName="comment"
-    >
-    <label for="expenseDescription">Observaciones</label>
+  <div class="form-floating mb-3">
+  <textarea
+    class="form-control"
+    id="expenseComments"
+    placeholder="Observaciones sobre el pago"
+    formControlName="comment"
+    style="height: 100px"
+    (keydown.enter)="$event.preventDefault()"
+  ></textarea>
+    <label for="expenseComments">Observaciones sobre el pago</label>
   </div>
 
   <!-- CAMERA and INPUT FILE -->
@@ -70,16 +79,16 @@
   </div>
 
   <!-- PREVIEW -->
-  <div *ngIf="imagePreviewUrl" class="d-flex justify-content-center mb-3">
-    <p>Preview:</p>
-
-    <img [src]="imagePreviewUrl" alt="preview" style="width: 100px; height: auto;"/>
-
-    <button type="button" class="btn btn-danger btn-sm" (click)="removeImage()">
-      <i class="fa fa-times"></i>
-    </button>
+  <div *ngIf="imagePreviewUrl" class="row text-center mb-3">
+    <div class="col-10">
+      <img [src]="imagePreviewUrl" alt="preview" style="width: 140px; height: auto;"/>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-outline-secondary mt-5" (click)="removeImage()">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
   </div>
-
 
   <!-- LOADING -->
   <div class="d-flex justify-content-center" *ngIf="loading">
@@ -90,18 +99,30 @@
 
   <div class="row fixed-bottom p-3">
     <div class="col-12 d-flex justify-content-between">
-      <button type="reset" class="btn btn-danger rounded-circle p-3" (click)="cancel()">
-        <i class="fa-solid fa-xmark fa-2xl"></i>
+
+      <!-- CANCEL FORM -->
+      <button
+        type="reset"
+        class="btn btn-danger rounded-4"
+        (click)="cancel()"
+      >
+        <i class="fa-solid fa-xmark me-2"></i>
+        Cancelar
       </button>
 
-      <button
-        type="submit"
-        [disabled]="loading"
-        class="btn btn-success rounded-circle p-3"
-      >
-        <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"></span>
-        <i *ngIf="!loading" class="fa-solid fa-floppy-disk fa-2xl"></i>
+
+      <!-- SAVE FORM - LOADING -->
+      <button *ngIf="loading" [disabled]="loading" type="submit" class="btn btn-success rounded-4">
+        <span class="spinner-border spinner-border-sm me-2"></span>
+        Guardando...
       </button>
+
+      <!-- SAVE FORM - NOT LOADING -->
+      <button *ngIf="!loading" [disabled]="loading" type="submit" class="btn btn-success rounded-4">
+        <i class="fa-solid fa-floppy-disk me-2"></i>
+        Guardar
+      </button>
+
     </div>
   </div>
 </form>

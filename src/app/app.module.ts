@@ -28,6 +28,7 @@ import { BtnShareComponent } from './components/buttons/btn-share/btn-share.comp
 import { BtnSaveComponent } from './components/buttons/btn-save/btn-save.component';
 import { LoginComponent } from './components/login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { TitleComponent } from './components/title/title.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     BtnCancelComponent,
     BtnShareComponent,
     BtnSaveComponent,
-    LoginComponent
+    LoginComponent,
+    TitleComponent
   ],
   imports: [
     BrowserModule,

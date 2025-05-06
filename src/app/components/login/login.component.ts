@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  private authService = inject(AuthService);
 
+  async login(): Promise<void> {
+    try {
+      await this.authService.loginWithGoogle();
+    } catch (e) {
+      console.error(e);
+    }
+  }
 }

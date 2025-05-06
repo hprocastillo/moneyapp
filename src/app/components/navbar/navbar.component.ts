@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {Observable} from 'rxjs';
+import {User} from 'firebase/auth';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +10,18 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-  public collapsed = true;
+  /** injects **/
+  private authService = inject(AuthService);
 
+  /** variables **/
+  public collapsed = true;
+  public user$: Observable<User | null> = this.authService.user$;
+
+  async logout(): Promise<void> {
+    try {
+      await this.authService.logout();
+    } catch (e) {
+      console.error(e);
+    }
+  }
 }

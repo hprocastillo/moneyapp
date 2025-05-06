@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ExpensesService} from '../../../services/expenses.service';
 import {ButtonsService} from '../../../services/buttons.service';
 import {addDoc, collection, Firestore} from '@angular/fire/firestore';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-expenses-new',
@@ -14,15 +15,19 @@ import {addDoc, collection, Firestore} from '@angular/fire/firestore';
   styleUrl: './expenses-new.component.scss'
 })
 export class ExpensesNewComponent {
+  /** injects **/
   private buttonService = inject(ButtonsService);
   private expenseService = inject(ExpensesService);
 
-  @ViewChild('imageInput') imageInput!: ElementRef<HTMLInputElement>;
+  /** childs **/
+  @ViewChild('imageInput') imageInput?: ElementRef<HTMLInputElement>;
+
+  /** variables **/
   public expenseForm: FormGroup;
   public loading: boolean = false;
   public uploadProgress: number = 0;
-  private selectedImageFile: File | null = null;
   public imagePreviewUrl: string | null = null;
+  private selectedImageFile: File | null = null;
 
   constructor(private fb: FormBuilder) {
     this.expenseForm = this.fb.group({
@@ -41,17 +46,24 @@ export class ExpensesNewComponent {
       const reader = new FileReader();
       reader.onload = () => {
         this.imagePreviewUrl = reader.result as string;
+
+        /** Opcional: resetea el input después de cargar para permitir re-selección de la misma imagen **/
+        if (this.imageInput?.nativeElement) {
+          this.imageInput.nativeElement.value = '';
+        }
       };
       reader.readAsDataURL(file);
     }
   }
 
-  removeImage() {
+  removeImage(): void {
     this.selectedImageFile = null;
     this.imagePreviewUrl = null;
-    this.imageInput.nativeElement.value = ''; // limpiar input
-  }
 
+    if (this.imageInput?.nativeElement) {
+      this.imageInput.nativeElement.value = '';
+    }
+  }
 
   async onSubmit() {
     if (this.expenseForm.invalid || this.loading) return;

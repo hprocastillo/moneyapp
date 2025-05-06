@@ -7,25 +7,33 @@ import {
   updateDoc,
   deleteDoc,
   collectionData,
-  docData,
+  docData, where, orderBy, query
 } from '@angular/fire/firestore';
+import {Auth} from '@angular/fire/auth';
 import {Storage, ref, uploadBytesResumable, getDownloadURL} from '@angular/fire/storage';
-import {Observable} from 'rxjs';
+import {Observable, switchMap} from 'rxjs';
 import {Expense} from '../interfaces/expense';
 import {v4 as uuidv4} from 'uuid';
 import {Timestamp} from 'firebase/firestore';
+import {AuthService} from './auth.service';
+import {startOfMonth, endOfMonth} from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpensesService {
+  /** injects **/
   private firestore: Firestore = inject(Firestore);
   private storage: Storage = inject(Storage);
+  private authService = inject(AuthService);
+
 
   private readonly DEFAULT_RECEIPT_URL = 'https://firebasestorage.googleapis.com/v0/b/erp-freeforall.firebasestorage.app/o/receipts%2Fdefault-receipt.png?alt=media&token=6f8993a3-a1b7-4570-9e60-a34ea34f86d8';
   private readonly collectionRef = collection(this.firestore, 'expenses');
-  private now: Timestamp = Timestamp.now();
 
+
+
+  /** upload image to firebase storage **/
   private uploadImage(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const filePath = `receipts/${uuidv4()}`;
@@ -44,6 +52,18 @@ export class ExpensesService {
     });
   }
 
+  /** get expenses of the current month **/
+  getExpensesOfCurrentMonth(): Observable<Expense[]> {
+    const now = new Date();
+    const start = Timestamp.fromDate(startOfMonth(now));
+    const end = Timestamp.fromDate(endOfMonth(now));
+
+    const expensesRef = collection(this.firestore, 'expenses');
+    const q = query(expensesRef, where('createdAt', '>=', start), where('createdAt', '<=', end));
+
+    return collectionData(q, { idField: 'id' }) as Observable<Expense[]>;
+  }
+
   getAll(): Observable<Expense[]> {
     return collectionData(this.collectionRef, {idField: 'id'}) as Observable<Expense[]>;
   }
@@ -55,6 +75,8 @@ export class ExpensesService {
 
   async addExpense(data: any, imageFile?: File): Promise<void> {
     let receiptUrl: string | null = null;
+    const currentUser = this.authService.currentUser;
+    if (!currentUser) return;
 
     // Si hay imagen, subirla
     if (imageFile) {
@@ -65,13 +87,14 @@ export class ExpensesService {
     }
 
     // Crear el objeto expense
+    const now: Timestamp = Timestamp.now();
     const expense: any = {
       ...data,
       receiptUrl,
-      createdAt: this.now,
-      updatedAt: this.now,
-      createdBy: 'usuario', // reemplaza con autenticación real si tienes
-      updatedBy: 'usuario',
+      createdAt: now,
+      updatedAt: now,
+      createdBy: currentUser.uid,
+      updatedBy: currentUser.uid,
     };
 
     // Guardar en Firestore

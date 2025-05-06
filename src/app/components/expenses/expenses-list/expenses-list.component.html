@@ -1,10 +1,26 @@
-<h5>Mis Gastos</h5>
-<hr>
+<app-title [title]="'mis gastos'"></app-title>
+
+<div class="row">
+  <div class="col-6 text-start">
+    <h3 class="text-uppercase">{{ currentMonth }}</h3>
+  </div>
+  <div class="col-6 text-end">
+    <h3><strong>S/. {{ totalAmount$ | async }}</strong></h3>
+  </div>
+</div>
+
 
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">
+  <li class="list-group-item d-flex justify-content-between" *ngFor="let expense of listExpenses$ | async">
+    <div>
+      <p class="mb-0">{{ expense.description }}</p>
+      <p>{{expense.createdBy}}</p>
+      <p class="text-muted small">{{ expense.createdAt.toDate() | date:'medium' }}</p>
+    </div>
 
-
+    <div>
+      <p>S/. {{ expense.amount }}</p>
+    </div>
   </li>
 </ul>
 
