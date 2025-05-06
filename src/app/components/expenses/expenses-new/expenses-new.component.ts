@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, inject, ViewChild} from '@angular/core';
 import {Timestamp} from 'firebase/firestore';
-import {Storage, ref, uploadBytes, getDownloadURL} from '@angular/fire/storage';
+import {Storage, ref, uploadBytes, getDownloadURL, uploadBytesResumable} from '@angular/fire/storage';
 import {v4 as uuidv4} from 'uuid';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ExpensesService} from '../../../services/expenses.service';
 import {ButtonsService} from '../../../services/buttons.service';
+import {addDoc, collection, Firestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-expenses-new',
@@ -13,68 +14,64 @@ import {ButtonsService} from '../../../services/buttons.service';
   styleUrl: './expenses-new.component.scss'
 })
 export class ExpensesNewComponent {
+  private buttonService = inject(ButtonsService);
+  private expenseService = inject(ExpensesService);
+
+  @ViewChild('imageInput') imageInput!: ElementRef<HTMLInputElement>;
   public expenseForm: FormGroup;
-  public loading = false;
+  public loading: boolean = false;
+  public uploadProgress: number = 0;
   private selectedImageFile: File | null = null;
   public imagePreviewUrl: string | null = null;
 
-  constructor(private fb: FormBuilder, private buttonService: ButtonsService, private expenseService: ExpensesService, private storage: Storage) {
+  constructor(private fb: FormBuilder) {
     this.expenseForm = this.fb.group({
-      description: [''],
-      amount: [0, Validators.required],
-      receiptUrl: [''],
+      description: ['', Validators.required],
+      amount: [0, [Validators.required, Validators.min(0.01)]],
       paymentMethod: ['EFECTIVO', Validators.required],
+      comment: ['', Validators.required]
     });
+  }
+
+  onImageSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.selectedImageFile = file;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreviewUrl = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  removeImage() {
+    this.selectedImageFile = null;
+    this.imagePreviewUrl = null;
+    this.imageInput.nativeElement.value = ''; // limpiar input
+  }
+
+
+  async onSubmit() {
+    if (this.expenseForm.invalid || this.loading) return;
+    this.loading = true;
+    try {
+      await this.expenseService.addExpense(this.expenseForm.value, this.selectedImageFile || undefined);
+
+      this.expenseForm.reset();
+      this.selectedImageFile = null;
+      this.imagePreviewUrl = null;
+      alert('✅ Gasto guardado con éxito');
+    } catch (error) {
+      console.error(error);
+      alert('❌ Error al guardar el gasto');
+    } finally {
+      this.loading = false;
+    }
   }
 
   cancel(): void {
     this.buttonService.emitButtonPress("LIST");
-  }
-
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      this.selectedImageFile = input.files[0];
-      this.imagePreviewUrl = URL.createObjectURL(this.selectedImageFile);
-    }
-  }
-
-  async submit() {
-    if (this.expenseForm.invalid) return;
-
-    this.loading = true;
-
-    try {
-      let receiptUrl = '';
-
-      // 1. Subir imagen si hay
-      if (this.selectedImageFile) {
-        const path = `receipts/${uuidv4()}`;
-        const fileRef = ref(this.storage, path);
-        await uploadBytes(fileRef, this.selectedImageFile);
-        receiptUrl = await getDownloadURL(fileRef);
-      }
-
-      // 2. Crear gasto
-      const userId = 'USER_ID'; // reemplazar con auth real
-      const data = {
-        ...this.expenseForm.value,
-        receiptUrl,
-        createdAt: Timestamp.now(),
-        updatedAt: Timestamp.now(),
-        createdBy: userId,
-        updatedBy: userId,
-      };
-
-      await this.expenseService.create(data);
-      this.expenseForm.reset();
-      this.imagePreviewUrl = null;
-      this.selectedImageFile = null;
-    } catch (err) {
-      console.error('Error al guardar el gasto:', err);
-      // puedes agregar un toast o alerta aquí
-    } finally {
-      this.loading = false;
-    }
   }
 }

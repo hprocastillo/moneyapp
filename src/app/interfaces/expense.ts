@@ -5,7 +5,8 @@ export interface Expense {
   description: string;
   amount: number;
   receiptUrl?: string;
-  paymentMethod: "EFECTIVO" | "TARJETA" | "YAPE";
+  paymentMethod: "EFECTIVO" | "TARJETA" | "YAPE" | "TRANSFERENCIA";
+  comment?: string
 
   createdBy: string;
   createdAt: Timestamp;

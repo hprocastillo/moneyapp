@@ -1,7 +1,7 @@
-<h5>Nuevo Gasto</h5>
-<hr class="text-muted">
+<h5 class="mb-0">Nuevo Gasto</h5>
+<hr class="text-muted m-0">
 
-<form [formGroup]="expenseForm" (ngSubmit)="submit()">
+<form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
 
   <!-- DESCRIPTION -->
   <div class="form-floating mb-3">
@@ -39,25 +39,52 @@
     <label for="expensePayment">Metodo de pago</label>
   </div>
 
-  <!-- RECEIPT PHOTO -->
-  <div class="mb-3">
-    <!-- INPUT FILE -->
+  <!-- COMMENTS -->
+  <div class="form-floating mb-5">
     <input
-      type="file"
-      accept="image/*"
-      capture="environment"
-      hidden
-      #fileInput
-      (change)="onFileSelected($event)"
-    />
-    <button type="button" (click)="fileInput.click()">
-      <i class="fa-solid fa-camera"></i> Tomar Foto
+      type="text"
+      class="form-control"
+      id="expenseComments"
+      placeholder="Observaciones"
+      formControlName="comment"
+    >
+    <label for="expenseDescription">Observaciones</label>
+  </div>
+
+  <!-- CAMERA and INPUT FILE -->
+  <div *ngIf="!imagePreviewUrl" class="text-center mb-3">
+    <button type="button" class="btn btn-outline-secondary rounded-circle p-3" (click)="imageInput.click()">
+      <i class="fa-solid fa-camera-retro fa-3x"></i>
     </button>
 
-    <!-- PREVIEW -->
-    <div *ngIf="imagePreviewUrl" class="preview">
-      <img [src]="imagePreviewUrl" alt="Foto recibo" width="120"/>
-    </div>
+    <p>Tomar foto al recibo</p>
+
+    <input
+      #imageInput
+      type="file"
+      accept="image/*"
+      (change)="onImageSelected($event)"
+      hidden
+      capture="environment"
+    />
+  </div>
+
+  <!-- PREVIEW -->
+  <div *ngIf="imagePreviewUrl" class="d-flex justify-content-center mb-3">
+    <p>Preview:</p>
+
+    <img [src]="imagePreviewUrl" alt="preview" style="width: 100px; height: auto;"/>
+
+    <button type="button" class="btn btn-danger btn-sm" (click)="removeImage()">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+
+
+  <!-- LOADING -->
+  <div class="d-flex justify-content-center" *ngIf="loading">
+    <progress [value]="uploadProgress" max="100"></progress>
+    Subiendo: {{ uploadProgress | number: '1.0-0' }}%
   </div>
 
 
@@ -67,8 +94,13 @@
         <i class="fa-solid fa-xmark fa-2xl"></i>
       </button>
 
-      <button type="submit" class="btn btn-success rounded-circle p-3">
-        <i class="fa-solid fa-floppy-disk fa-2xl"></i>
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="btn btn-success rounded-circle p-3"
+      >
+        <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"></span>
+        <i *ngIf="!loading" class="fa-solid fa-floppy-disk fa-2xl"></i>
       </button>
     </div>
   </div>
