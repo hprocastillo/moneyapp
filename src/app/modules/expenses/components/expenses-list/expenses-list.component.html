@@ -1,0 +1,38 @@
+<!-- HEADER -->
+<div class="row">
+  <div class="col-6 text-start">
+    <h3 class="text-uppercase">{{ currentMonth }}</h3>
+  </div>
+  <div class="col-6 text-end">
+    <h3>S/. <strong>{{ totalAmount$ | async | number }}</strong></h3>
+  </div>
+</div>
+
+<hr class="text-muted mt-0">
+
+
+<ul class="list-group list-group-flush">
+  <li *ngFor="let expense of listExpenses$ | async" class="list-group-item d-flex justify-content-between">
+    <div>
+      <p class="mb-0">{{ expense.description }}</p>
+      <p>{{ expense.createdBy }}</p>
+      <p class="text-muted small">{{ expense.createdAt.toDate() | date:'medium' }}</p>
+    </div>
+
+    <div>
+      <p>S/. {{ expense.amount }}</p>
+    </div>
+  </li>
+</ul>
+
+
+<!-- FIXED ROW BOTTOM -->
+<div class="row fixed-bottom p-3">
+  <div class="col-12 d-flex justify-content-end">
+
+    <button (click)="pressNew()" class="btn btn-primary btn-lg rounded-circle" type="button">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+
+  </div>
+</div>
