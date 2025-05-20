@@ -1,0 +1,24 @@
+<div class="row fixed-bottom bg-dark">
+  <div class="d-flex justify-content-between">
+
+    <button type="button" class="btn btn-dark me-2" (click)="goModule('dashboard')">
+      <i class="fa-solid fa-house fa-xl" style="color:#ffffff;"></i>
+      <span style="font-size: 0.8rem">Inicio</span>
+    </button>
+
+    <button type="button" class="btn btn-dark me-2" (click)="goModule('movements/list')">
+      <i class="fa-solid fa-money-bill-transfer fa-xl" style="color: #ffffff;"></i>
+      <span style="font-size: 0.8rem">Movimientos</span>
+    </button>
+
+    <button type="button" class="btn btn-dark me-2" (click)="goModule('groups')">
+      <i class="fa-solid fa-user-group fa-xl" style="color:#ffffff;"></i>
+      <span style="font-size: 0.8rem">Grupos</span>
+    </button>
+
+    <button type="button" class="btn btn-dark" (click)="goModule('share')">
+      <i class="fa-solid fa-share-from-square fa-xl" style="color: #ffffff;"></i>
+      <span style="font-size: 0.8rem">Compartir</span>
+    </button>
+  </div>
+</div>

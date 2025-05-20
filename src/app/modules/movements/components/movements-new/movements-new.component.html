@@ -1,0 +1,115 @@
+<!------------>
+<!-- HEADER -->
+<div class="row">
+  <div class="col-1 pt-1">
+    <i class="fa-solid fa-chevron-left" (click)="goBack()"></i>
+  </div>
+  <div class="col-11 ps-0">
+    <h3 class="text-capitalize">Nuevo movimiento</h3>
+  </div>
+</div>
+<hr class="text-muted">
+
+<!---------->
+<!-- FORM -->
+<form>
+
+  <!-- TYPE MOVEMENT -->
+  <div class="form-floating mb-3">
+    <select class="form-select" id="typeMovement" aria-label="Floating label select example">
+      <option selected>Seleccionar</option>
+      <option value="1">INGRESO</option>
+      <option value="2">EGRESO</option>
+    </select>
+    <label for="typeMovement">Tipo movimiento</label>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="form-floating mb-3">
+    <input
+      type="text"
+      class="form-control"
+      id="description"
+      placeholder="Descripción"
+    >
+    <label for="description">Descripción</label>
+  </div>
+
+  <!--PAYMENT METHOD AND AMOUNT-->
+  <div class="row mb-3">
+    <div class="col-5 pe-0">
+      <!-- AMOUNT -->
+      <div class="form-floating">
+        <input
+          type="number"
+          class="form-control"
+          id="amount"
+          placeholder="S/. Monto"
+        >
+        <label for="amount">S/. Monto</label>
+      </div>
+    </div>
+    <div class="col-7">
+      <!-- PAYMENT METHOD -->
+      <div class="form-floating">
+        <select class="form-select" id="paymentMethod" aria-label="Floating label select example">
+          <option selected>Seleccionar</option>
+          <option value="1">EFECTIVO</option>
+          <option value="2">YAPE</option>
+          <option value="3">TARJETA</option>
+          <option value="4">TRANSFERENCIA</option>
+        </select>
+        <label for="paymentMethod">Medio de pago</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMENTS -->
+  <div class="form-floating mb-3">
+    <textarea
+      class="form-control"
+      placeholder="Observaciones"
+      id="comments"
+      style="height: 80px"
+    ></textarea>
+    <label for="comments">Observaciones</label>
+  </div>
+
+  <!-- PHOTO RECEIPT -->
+  <div class="row">
+    <div class="col-12">
+      <p class="text-muted">Adjuntar imagen de comprobante</p>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-light p-3">
+        <i class="fa-solid fa-camera fa-2xl"></i>
+      </button>
+      <p class="small">Tomar foto</p>
+    </div>
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-light p-3">
+        <i class="fa-solid fa-folder-open fa-2xl"></i>
+      </button>
+      <p class="small">Subir imagen</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <button type="reset" class="btn btn-danger w-100">
+        <i class="fa-solid fa-xmark me-2"></i>
+        Cancelar
+      </button>
+    </div>
+    <div class="col-6">
+      <button type="submit" class="btn btn-success w-100">
+        <i class="fa-solid fa-floppy-disk me-2"></i>
+        Guardar
+      </button>
+    </div>
+  </div>
+
+
+</form>

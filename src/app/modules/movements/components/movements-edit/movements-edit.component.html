@@ -1,0 +1,126 @@
+<div *ngIf="movement">
+  <form (ngSubmit)="save()" #f="ngForm">
+
+    <!-- Header -->
+    <div class="row border-bottom mb-3">
+      <div class="col-1 pt-1">
+        <i class="fa-solid fa-chevron-left" (click)="goBack()"></i>
+      </div>
+      <div class="col-11">
+        <h3 class="text-uppercase">Editar</h3>
+      </div>
+    </div>
+
+    <!-- Type movement and Payment method -->
+    <div class="row mb-3">
+      <div class="col-6">
+        <div class="form-floating">
+          <select
+            class="form-select"
+            id="typeSelect"
+            name="type"
+            [(ngModel)]="movement.type"
+            required>
+            <option selected>Seleccionar</option>
+            <option value="INGRESO">INGRESO</option>
+            <option value="EGRESO">EGRESO</option>
+          </select>
+          <label for="typeSelect">Tipo de Movimiento</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-floating">
+          <select
+            class="form-select"
+            id="paymentSelect"
+            name="paymentMethod"
+            [(ngModel)]="movement.paymentMethod"
+            required>
+            <option selected>Seleccionar</option>
+            <option value="EFECTIVO">EFECTIVO</option>
+            <option value="YAPE">YAPE</option>
+            <option value="TARJETA">TARJETA</option>
+            <option value="TRANSFERENCIA">TRANSFERENCIA</option>
+          </select>
+          <label for="paymentSelect">Medio de Pago</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="descriptionInput"
+        name="description"
+        [(ngModel)]="movement.description"
+        placeholder="Descripción"
+        required>
+      <label for="descriptionInput">Descripción</label>
+    </div>
+
+    <!-- Amound and Date-->
+    <div class="row mb-3">
+      <div class="col-6">
+        <div class="form-floating">
+          <input
+            type="number"
+            class="form-control"
+            id="amountInput"
+            name="amount"
+            [(ngModel)]="movement.amount"
+            placeholder="Monto S/."
+            required>
+          <label for="amountInput">Monto S/.</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <p class="text-muted small mb-1">Fecha</p>
+        <p>{{ movement.date }}</p>
+      </div>
+    </div>
+
+    <!-- Receipt Image -->
+    <div class="row mb-3">
+      <div class="col-8">
+        <p class="fw-medium">Imagen comprobante</p>
+        <img [src]="[movement.receiptUrl]" height="200px" alt="">
+      </div>
+      <div class="col-4">
+        <br>
+        <div>
+          <button type="button" class="btn btn-light p-3">
+            <i class="fa-solid fa-camera fa-2xl"></i>
+          </button>
+          <p class="small">Tomar foto</p>
+        </div>
+        <div>
+          <button type="button" class="btn btn-light p-3">
+            <i class="fa-solid fa-folder-open fa-2xl"></i>
+          </button>
+          <p class="small">Subir imagen</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="row">
+      <div class="col-6">
+        <button type="reset" class="btn btn-danger w-100">
+          <i class="fa-solid fa-xmark me-2"></i>
+          Cancelar
+        </button>
+      </div>
+
+
+      <div class="col-6">
+        <button type="submit" class="btn btn-success w-100">
+          <i class="fa-solid fa-floppy-disk me-2"></i>
+          Guardar
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>

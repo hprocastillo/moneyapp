@@ -1,0 +1,194 @@
+<!------------------------------------------>
+<!---------------- HEADER ------------------>
+<div class="row">
+  <div class="col-1 pt-1">
+    <i class="fa-solid fa-chevron-left" (click)="goBack()"></i>
+  </div>
+  <div class="col-7 ps-0">
+    <h3 class="text-capitalize">Movimientos</h3>
+  </div>
+  <div class="col-4 d-flex justify-content-between">
+    <button type="button" class="btn btn-light rounded-circle" (click)="filterCollapsed = !filterCollapsed">
+      <i class="fa-solid fa-sliders"></i>
+    </button>
+    <button type="button" class="btn btn-success rounded-circle" (click)="goModule('/movements/new')">
+      <i class="fa-solid fa-plus fa-xl"></i>
+    </button>
+  </div>
+</div>
+<hr class="text-muted">
+
+<!------------------------------------------>
+<!--------------- SEARCH ------------------->
+<div class="row">
+  <div class="col-12">
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="searchText"
+        placeholder="Buscar por descripcion"
+        [(ngModel)]="model"
+        [ngbTypeahead]="search"
+      >
+      <label for="searchText">Buscar por descripción</label>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------------>
+<!--------------- FILTERS ------------------>
+<div [ngbCollapse]="filterCollapsed">
+  <!-- TYPE -->
+  <div class="row mb-3">
+    <div class="col-8">
+      <div class="form-floating mb-3">
+        <select class="form-select" id="filterType">
+          <option selected>Seleccionar</option>
+          <option value="1">INGRESO</option>
+          <option value="2">EGRESO</option>
+        </select>
+        <label for="filterType">Filtrar por tipo:</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATE -->
+  <div class="row">
+    <div class="col-12">
+      <p class="mb-1">Filtrar por fecha:</p>
+      <ngb-datepicker #dp/>
+    </div>
+  </div>
+  <hr class="text-muted mb-3">
+</div>
+
+
+<!------------------------------------------>
+<!----------------- LIST ------------------->
+<div class="row">
+  <div class="col-12">
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item ps-0 pe-0">
+        <div class="row">
+          <div class="col-7">
+            <p class="fw-medium mb-0">Ferreteria</p>
+            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
+          </div>
+          <div class="col-4 text-end pe-0">
+            <p class="mt-2">S/ 8,423.00</p>
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item ps-0 pe-0">
+        <div class="row">
+          <div class="col-7">
+            <p class="fw-medium mb-0">Ferreteria</p>
+            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
+          </div>
+          <div class="col-4 text-end pe-0">
+            <p class="mt-2">S/ 8,423.00</p>
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item ps-0 pe-0">
+        <div class="row">
+          <div class="col-7">
+            <p class="fw-medium mb-0">Ferreteria</p>
+            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
+          </div>
+          <div class="col-4 text-end pe-0">
+            <p class="mt-2">S/ 8,423.00</p>
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item ps-0 pe-0">
+        <div class="row">
+          <div class="col-7">
+            <p class="fw-medium mb-0">Ferreteria</p>
+            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
+          </div>
+          <div class="col-4 text-end pe-0">
+            <p class="mt-2">S/ 8,423.00</p>
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item ps-0 pe-0">
+        <div class="row">
+          <div class="col-7">
+            <p class="fw-medium mb-0">Ferreteria</p>
+            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
+          </div>
+          <div class="col-4 text-end pe-0">
+            <p class="mt-2">S/ 8,423.00</p>
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item ps-0 pe-0">
+        <div class="row">
+          <div class="col-7">
+            <p class="fw-medium mb-0">Ferreteria</p>
+            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
+          </div>
+          <div class="col-4 text-end pe-0">
+            <p class="mt-2">S/ 8,423.00</p>
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item ps-0 pe-0">
+        <div class="row">
+          <div class="col-7">
+            <p class="fw-medium mb-0">Ferreteria</p>
+            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
+          </div>
+          <div class="col-4 text-end pe-0">
+            <p class="mt-2">S/ 8,423.00</p>
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item ps-0 pe-0">
+        <div class="row">
+          <div class="col-7">
+            <p class="fw-medium mb-0">Ferreteria</p>
+            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
+          </div>
+          <div class="col-4 text-end pe-0">
+            <p class="mt-2">S/ 8,423.00</p>
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
