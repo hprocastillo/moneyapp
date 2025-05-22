@@ -26,8 +26,8 @@ const movements = [
 })
 export class MovementsListComponent {
   /** injects **/
-  private router = inject(Router);
-  private location = inject(Location);
+  public router = inject(Router);
+  public location = inject(Location);
 
 
   /** variables **/

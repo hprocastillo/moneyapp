@@ -6,35 +6,72 @@ import {of} from 'rxjs';
   providedIn: 'root'
 })
 export class MovementsService {
-
   private movements: Movement[] = [
     {
       id: '1',
-      type: 'EGRESO',
+      typeMovement: 'EGRESO',
       paymentMethod: 'TARJETA',
       description: 'Gastos en ferreteria',
       amount: 3487.09,
+      comments: 'sin comentarios',
       receiptUrl: 'https://firebasestorage.googleapis.com/v0/b/erp-freeforall.firebasestorage.app/o/receipts%2F14f76b69-50e2-45e6-8844-5e2fcc50189f?alt=media&token=c61b5d48-9c97-4d9a-a1ec-66b35e634bc4',
-      date: '20, Mayo 2025 12:08PM'
+      createdBy: 'Herbert Pro Castillo',
+      createdAt: '20, Mayo 2025 12:08PM',
+      updatedBy: 'Herbert Pro Castillo',
+      updatedAt: '20, Mayo 2025 12:08PM'
     },
     {
       id: '2',
-      type: 'EGRESO',
+      typeMovement: 'EGRESO',
       paymentMethod: 'YAPE',
-      description: 'Adelanto albañil',
-      amount: 500.00,
+      description: 'Compra de comida',
+      amount: 200.00,
+      comments: 'Compras en unicachi',
       receiptUrl: 'https://firebasestorage.googleapis.com/v0/b/erp-freeforall.firebasestorage.app/o/receipts%2F14f76b69-50e2-45e6-8844-5e2fcc50189f?alt=media&token=c61b5d48-9c97-4d9a-a1ec-66b35e634bc4',
-      date: '18, Mayo 2025 01:30PM'
+      createdBy: 'Herbert Pro Castillo',
+      createdAt: '19, Mayo 2025 04:01PM',
+      updatedBy: 'Herbert Pro Castillo',
+      updatedAt: '19, Mayo 2025 04:01PM'
     },
     {
       id: '3',
-      type: 'INGRESO',
+      typeMovement: 'INGRESO',
       paymentMethod: 'EFECTIVO',
-      description: 'Transferencia Edith',
-      amount: 20000.09,
+      description: 'Adelanto al albañil',
+      amount: 300.00,
+      comments: 'Quincena al albañil',
       receiptUrl: 'https://firebasestorage.googleapis.com/v0/b/erp-freeforall.firebasestorage.app/o/receipts%2F14f76b69-50e2-45e6-8844-5e2fcc50189f?alt=media&token=c61b5d48-9c97-4d9a-a1ec-66b35e634bc4',
-      date: '15, Mayo 2025 05:20PM'
-    }
+      createdBy: 'Herbert Pro Castillo',
+      createdAt: '20, Mayo 2025 12:08PM',
+      updatedBy: 'Herbert Pro Castillo',
+      updatedAt: '20, Mayo 2025 12:08PM'
+    },
+    {
+      id: '4',
+      typeMovement: 'EGRESO',
+      paymentMethod: 'TARJETA',
+      description: 'Gastos en ferreteria',
+      amount: 3487.09,
+      comments: 'sin comentarios',
+      receiptUrl: 'https://firebasestorage.googleapis.com/v0/b/erp-freeforall.firebasestorage.app/o/receipts%2F14f76b69-50e2-45e6-8844-5e2fcc50189f?alt=media&token=c61b5d48-9c97-4d9a-a1ec-66b35e634bc4',
+      createdBy: 'Herbert Pro Castillo',
+      createdAt: '20, Mayo 2025 12:08PM',
+      updatedBy: 'Herbert Pro Castillo',
+      updatedAt: '20, Mayo 2025 12:08PM'
+    },
+    {
+      id: '5',
+      typeMovement: 'EGRESO',
+      paymentMethod: 'TARJETA',
+      description: 'Gastos en ferreteria',
+      amount: 3487.09,
+      comments: 'sin comentarios',
+      receiptUrl: 'https://firebasestorage.googleapis.com/v0/b/erp-freeforall.firebasestorage.app/o/receipts%2F14f76b69-50e2-45e6-8844-5e2fcc50189f?alt=media&token=c61b5d48-9c97-4d9a-a1ec-66b35e634bc4',
+      createdBy: 'Herbert Pro Castillo',
+      createdAt: '20, Mayo 2025 12:08PM',
+      updatedBy: 'Herbert Pro Castillo',
+      updatedAt: '20, Mayo 2025 12:08PM'
+    },
   ];
 
   constructor() {

@@ -1,9 +1,14 @@
 export interface Movement {
   id: string;
-  type: 'INGRESO' | 'EGRESO';
+  typeMovement: 'INGRESO' | 'EGRESO';
   paymentMethod: 'EFECTIVO' | 'YAPE' | 'TARJETA' | 'TRANSFERENCIA';
   description: string;
   amount: number;
+  comments: string;
   receiptUrl: string;
-  date: string;
+
+  createdBy: string;
+  createdAt: string;
+  updatedBy: string;
+  updatedAt: string;
 }

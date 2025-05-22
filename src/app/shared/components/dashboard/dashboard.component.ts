@@ -13,9 +13,5 @@ import {
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-  private router = inject(Router);
-
-  async goModule(url: string) {
-    await this.router.navigate([url]);
-  }
+  public router = inject(Router);
 }

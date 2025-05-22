@@ -11,7 +11,7 @@ import {Location} from '@angular/common';
 export class MovementsNewComponent {
   /** injects **/
   private router = inject(Router);
-  private location = inject(Location);
+  public location = inject(Location);
 
 
   async goModule(url: string) {

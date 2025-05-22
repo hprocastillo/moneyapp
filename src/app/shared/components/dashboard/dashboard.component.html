@@ -1,21 +1,19 @@
-<!------------>
 <!-- HEADER -->
 <div class="row">
   <div class="col-8">
     <h3>MoneyApp</h3>
   </div>
   <div class="col-4 d-flex justify-content-between">
-    <button type="button" class="btn btn-light rounded-circle" (click)="goModule('/settings')">
+    <button type="button" class="btn btn-light rounded-circle" (click)="router.navigate(['/settings'])">
       <i class="fa-solid fa-ellipsis-vertical"></i>
     </button>
 
-    <button type="button" class="btn btn-success rounded-circle" (click)="goModule('/movements/new')">
+    <button type="button" class="btn btn-success rounded-circle" (click)="router.navigate(['/movements/new'])">
       <i class="fa-solid fa-plus fa-xl"></i>
     </button>
   </div>
 </div>
 <hr class="text-muted">
 
-<!------------------------>
 <!-- CURRENTS MOVEMENTS -->
 <app-movements-current></app-movements-current>
