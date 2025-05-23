@@ -1,1 +1,86 @@
-<p>groups-list works!</p>
+<!--***** Header *****-->
+<div class="row mb-3">
+  <div class="col-1">
+    <i class="fa-solid fa-chevron-left" (click)="location.back()"></i>
+  </div>
+  <div class="col-9">
+    <h5 class="text-uppercase">grupos</h5>
+  </div>
+  <div class="col-2 d-flex justify-content-end">
+    <button type="button" class="btn btn-success rounded-circle" (click)="router.navigate(['/groups/new'])">
+      <i class="fa-solid fa-plus fa-xl"></i>
+    </button>
+  </div>
+</div>
+
+<!--***** search field *****-->
+<div class="row">
+  <div class="col-12">
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="searchText"
+        placeholder="Buscar por grupo"
+        [(ngModel)]="model"
+        [ngbTypeahead]="search"
+      >
+      <label for="searchText">Buscar por grupo</label>
+    </div>
+  </div>
+</div>
+
+<!--***** list *****-->
+<div class="row">
+  <div class="col-12">
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item ps-0 pe-0">
+        <div class="row">
+          <div class="col-7">
+            <p class="fw-medium mb-0">Proyecto chorrillos</p>
+            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
+          </div>
+          <div class="col-4 text-end pe-0">
+            <p class="mt-2">S/ 20,423.00</p>
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item ps-0 pe-0">
+        <div class="row">
+          <div class="col-7">
+            <p class="fw-medium mb-0">Cumpleaños mamá</p>
+            <p class="small text-muted mb-0">15 mayo, 10:40AM</p>
+          </div>
+          <div class="col-4 text-end pe-0">
+            <p class="mt-2">S/ 250.00</p>
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item ps-0 pe-0">
+        <div class="row">
+          <div class="col-7">
+            <p class="fw-medium mb-0">Grupo C - 5to ciclo</p>
+            <p class="small text-muted mb-0">13 mayo, 06:10AM</p>
+          </div>
+          <div class="col-4 text-end pe-0">
+            <p class="mt-2">S/ 120.00</p>
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
+          </div>
+        </div>
+      </li>
+
+
+    </ul>
+  </div>
+</div>

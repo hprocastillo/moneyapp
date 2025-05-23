@@ -1,30 +1,41 @@
-<!------------>
-<!-- HEADER -->
-<div class="row">
-  <div class="col-1 pt-1">
+<!--***** Header *****-->
+<div class="row mb-3">
+  <div class="col-1">
     <i class="fa-solid fa-chevron-left" (click)="location.back()"></i>
   </div>
-  <div class="col-11 ps-0">
-    <h3 class="text-capitalize">nuevo movimiento</h3>
+  <div class="col-11">
+    <h5 class="text-uppercase">nuevo movimiento</h5>
   </div>
 </div>
-<hr class="text-muted">
 
-<!---------->
-<!-- FORM -->
 <form>
-
-  <!-- TYPE MOVEMENT -->
-  <div class="form-floating mb-3">
-    <select class="form-select" id="typeMovement" aria-label="Floating label select example">
-      <option selected>Seleccionar</option>
-      <option value="1">INGRESO</option>
-      <option value="2">EGRESO</option>
-    </select>
-    <label for="typeMovement">Tipo movimiento</label>
+  <div class="row mb-3">
+    <div class="col-5 pe-0">
+      <div class="form-floating">
+        <select class="form-select" id="typeSelect">
+          <option selected>Movimiento</option>
+          <option value="1">INGRESO</option>
+          <option value="2">EGRESO</option>
+        </select>
+        <label for="typeSelect">Tipo</label>
+      </div>
+    </div>
+    <div class="col-7">
+      <div class="form-floating">
+        <select class="form-select" id="groupSelect">
+          <option selected>Ninguno</option>
+          <option value="1">Proyecto Chorrillos</option>
+          <option value="2">Cumpleaños de mamá</option>
+        </select>
+        <label for="groupSelect">Grupo</label>
+      </div>
+    </div>
   </div>
 
-  <!-- DESCRIPTION -->
+  <!--***** Type movement *****-->
+
+
+  <!--***** Description *****-->
   <div class="form-floating mb-3">
     <input
       type="text"
@@ -35,10 +46,10 @@
     <label for="description">Descripción</label>
   </div>
 
-  <!--PAYMENT METHOD AND AMOUNT-->
+  <!--***** Amount and Payment method *****-->
   <div class="row mb-3">
     <div class="col-5 pe-0">
-      <!-- AMOUNT -->
+      <!-- amount -->
       <div class="form-floating">
         <input
           type="number"
@@ -50,21 +61,21 @@
       </div>
     </div>
     <div class="col-7">
-      <!-- PAYMENT METHOD -->
+      <!-- payment method -->
       <div class="form-floating">
         <select class="form-select" id="paymentMethod" aria-label="Floating label select example">
           <option selected>Seleccionar</option>
-          <option value="1">EFECTIVO</option>
-          <option value="2">YAPE</option>
-          <option value="3">TARJETA</option>
-          <option value="4">TRANSFERENCIA</option>
+          <option value="EFECTIVO">EFECTIVO</option>
+          <option value="YAPE">YAPE</option>
+          <option value="TARJETA">TARJETA</option>
+          <option value="TRANSFERENCIA">TRANSFERENCIA</option>
         </select>
         <label for="paymentMethod">Medio de pago</label>
       </div>
     </div>
   </div>
 
-  <!-- COMMENTS -->
+  <!--***** comments *****-->
   <div class="form-floating mb-3">
     <textarea
       class="form-control"
@@ -75,7 +86,7 @@
     <label for="comments">Observaciones</label>
   </div>
 
-  <!-- PHOTO RECEIPT -->
+  <!--***** photo receipt *****-->
   <div class="row">
     <div class="col-12">
       <p class="text-muted">Adjuntar imagen de comprobante</p>
@@ -96,6 +107,7 @@
     </div>
   </div>
 
+  <!--***** buttons *****-->
   <div class="row">
     <div class="col-6">
       <button type="reset" class="btn btn-danger w-100">
@@ -110,6 +122,4 @@
       </button>
     </div>
   </div>
-
-
 </form>

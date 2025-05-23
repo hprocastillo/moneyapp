@@ -1,55 +1,68 @@
-<!------------------------------------------>
-<!---------------- HEADER ------------------>
+<!--***** header *****-->
 <div *ngIf="movement">
-  <div class="row">
-    <div class="col-1 pt-1">
-      <i class="fa-solid fa-chevron-left" (click)="goBack()"></i>
+  <div class="row mb-4">
+    <div class="col-1">
+      <i class="fa-solid fa-chevron-left" (click)="location.back()"></i>
     </div>
-    <div class="col-7 ps-0">
-      <h3 class="text-capitalize">Movimiento</h3>
+    <div class="col-7">
+      <h5 class="text-uppercase">detalle</h5>
     </div>
     <div class="col-4 text-end">
-      <button type="button" class="btn btn-secondary me-2" (click)="goEdit(movement.id)">
+      <button type="button" class="btn btn-secondary btn-sm me-2"
+              (click)="router.navigate(['/movements/edit',movement.id])">
         <i class="fa-solid fa-pen-to-square"></i>
       </button>
-      <button type="button" class="btn btn-danger">
+      <button type="button" class="btn btn-danger btn-sm">
         <i class="fa-solid fa-trash"></i>
       </button>
     </div>
   </div>
-  <hr class="text-muted">
+
+  <!--***** Movements Detail *****-->
+  <div class="row mb-3">
+    <div class="col-6 text-start">
+      <p class="text-muted small mb-0">Tipo movimiento</p>
+      <p class="fw-medium mb-0">{{ movement.typeMovement }}</p>
+    </div>
+    <div class="col-6 text-end">
+      <p class="text-muted small mb-0">Grupo</p>
+      <p class="fw-medium mb-0">{{ movement.groupId }}</p>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-6 text-start">
+      <p class="text-muted small mb-0">Monto</p>
+      <p class="fw-medium mb-0">S/. {{ movement.amount |number:"1.1-2" }}</p>
+    </div>
+    <div class="col-6 text-end">
+      <p class="text-muted small mb-0">Medio de pago</p>
+      <p class="fw-medium mb-0">{{ movement.paymentMethod }}</p>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-6 text-start">
+      <p class="text-muted small mb-0">Descripción</p>
+      <p class="fw-medium mb-0">{{ movement.description }}</p>
+    </div>
+    <div class="col-6 text-end">
+      <p class="text-muted small mb-0">Observaciones</p>
+      <p class="fw-medium mb-0">{{ movement.comments }}</p>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col-12">
+      <p class="text-muted small mb-0">Fecha</p>
+      <p class="fw-medium mb-0">{{ movement.createdAt }}</p>
+    </div>
+  </div>
 
   <div class="row">
-    <div class="col-12">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item border-0 d-flex justify-content-between">
-          <div>
-            <p class="text-muted small mb-0">Tipo movimiento</p>
-            <p class="fw-medium mb-0">{{ movement.typeMovement }}</p>
-          </div>
-          <div>
-            <p class="text-muted small mb-0">Medio de pago</p>
-            <p class="fw-medium mb-0">{{ movement.paymentMethod }}</p>
-          </div>
-        </li>
-        <li class="list-group-item border-0">
-          <p class="text-muted small mb-0">Descripción</p>
-          <p class="fw-medium mb-0">{{ movement.description }}</p>
-        </li>
-        <li class="list-group-item border-0">
-          <p class="text-muted small mb-0">Monto</p>
-          <p class="fw-medium mb-0">S/. {{ movement.amount |number:"1.1-2" }}</p>
-        </li>
-        <li class="list-group-item border-0">
-          <p class="text-muted small mb-0">Fecha</p>
-          <p class="fw-medium mb-0">{{ movement.createdAt }}</p>
-        </li>
-        <li class="list-group-item border-0 text-center">
-          <img height="200px"
-               [src]="[movement.receiptUrl]"
-               alt="">
-        </li>
-      </ul>
+    <div class="col-12 text-center">
+      <img height="150px" [src]="[movement.receiptUrl]" alt="">
+      <p class="text-muted">Foto comprobante</p>
     </div>
   </div>
 </div>

@@ -8,9 +8,5 @@ import {Router} from '@angular/router';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-  private router = inject(Router);
-
-  async goModule(url: string) {
-    await this.router.navigate([url]);
-  }
+  public router = inject(Router);
 }

@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DecimalPipe, Location, NgIf} from '@angular/common';
+import {DatePipe, DecimalPipe, Location, NgIf} from '@angular/common';
 import {MovementsService} from '../../services/movements.service';
 import {Movement} from '../../interfaces/movement';
 
@@ -8,15 +8,16 @@ import {Movement} from '../../interfaces/movement';
   selector: 'app-movements-view',
   imports: [
     NgIf,
-    DecimalPipe
+    DecimalPipe,
+    DatePipe
   ],
   templateUrl: './movements-view.component.html',
   styleUrl: './movements-view.component.scss'
 })
 export class MovementsViewComponent implements OnInit {
   /** injects **/
-  private router = inject(Router);
-  private location = inject(Location);
+  public router = inject(Router);
+  public location = inject(Location);
   private route = inject(ActivatedRoute);
   private movementsService = inject(MovementsService);
 

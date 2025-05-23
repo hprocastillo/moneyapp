@@ -1,34 +1,91 @@
 <div *ngIf="movement">
   <form (ngSubmit)="save()" #f="ngForm">
 
-    <!-- Header -->
-    <div class="row border-bottom mb-3">
-      <div class="col-1 pt-1">
-        <i class="fa-solid fa-chevron-left" (click)="goBack()"></i>
+    <!--***** Header *****-->
+    <div class="row mb-3">
+      <div class="col-1">
+        <i class="fa-solid fa-chevron-left" (click)="location.back()"></i>
       </div>
-      <div class="col-11">
-        <h3 class="text-uppercase">Editar</h3>
+      <div class="col-7">
+        <h5 class="text-uppercase">editar</h5>
+      </div>
+      <div class="col-4 text-end">
+        <button type="reset" class="btn btn-danger btn-sm me-2">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button type="submit" class="btn btn-success btn-sm">
+          <i class="fa-solid fa-floppy-disk"></i>
+        </button>
       </div>
     </div>
 
-    <!-- Type movement and Payment method -->
+
+    <!--***** Type movement and group *****-->
     <div class="row mb-3">
-      <div class="col-6">
+      <div class="col-5 pe-0">
         <div class="form-floating">
           <select
             class="form-select"
             id="typeSelect"
-            name="type"
+            name="typeMovement"
             [(ngModel)]="movement.typeMovement"
             required>
-            <option selected>Seleccionar</option>
+            <option selected>Movimiento</option>
             <option value="INGRESO">INGRESO</option>
             <option value="EGRESO">EGRESO</option>
           </select>
-          <label for="typeSelect">Tipo de Movimiento</label>
+          <label for="typeSelect">Tipo</label>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-7">
+        <div class="form-floating">
+          <select
+            class="form-select"
+            id="groupSelect"
+            name="groupId"
+            [(ngModel)]="movement.groupId"
+            required>
+            <option selected>NINGUNO</option>
+            <option value="Proyecto Chorrillos">Proyecto Chorrillos</option>
+            <option value="Cumpleaños de mamá">Cumpleaños de mamá</option>
+          </select>
+          <label for="groupSelect">Grupo</label>
+        </div>
+      </div>
+    </div>
+
+
+    <!--***** Description *****-->
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="descriptionInput"
+        name="description"
+        [(ngModel)]="movement.description"
+        placeholder="Descripción"
+        required>
+      <label for="descriptionInput">Descripción</label>
+    </div>
+
+    <!--***** Amount and Payment Method *****-->
+    <div class="row mb-3">
+      <div class="col-5 pe-0">
+        <!-- amount -->
+        <div class="form-floating">
+          <input
+            type="number"
+            class="form-control"
+            id="amountInput"
+            name="amount"
+            [(ngModel)]="movement.amount"
+            placeholder="Monto S/."
+            required>
+          <label for="amountInput">Monto S/.</label>
+        </div>
+      </div>
+      <div class="col-7">
+        <!-- payment method -->
         <div class="form-floating">
           <select
             class="form-select"
@@ -47,48 +104,27 @@
       </div>
     </div>
 
-    <!-- Description -->
+    <!--***** comments *****-->
     <div class="form-floating mb-3">
-      <input
-        type="text"
-        class="form-control"
-        id="descriptionInput"
-        name="description"
-        [(ngModel)]="movement.description"
-        placeholder="Descripción"
-        required>
-      <label for="descriptionInput">Descripción</label>
+    <textarea
+      class="form-control"
+      placeholder="Observaciones"
+      id="commentsInput"
+      name="comments"
+      [(ngModel)]="movement.comments"
+      style="height: 80px"
+      required>
+    </textarea>
+      <label for="commentsInput">Observaciones</label>
     </div>
 
-    <!-- Amound and Date-->
-    <div class="row mb-3">
-      <div class="col-6">
-        <div class="form-floating">
-          <input
-            type="number"
-            class="form-control"
-            id="amountInput"
-            name="amount"
-            [(ngModel)]="movement.amount"
-            placeholder="Monto S/."
-            required>
-          <label for="amountInput">Monto S/.</label>
-        </div>
+    <!--***** Receipt image *****-->
+    <div class="row">
+      <div class="col-8 text-center">
+        <img [src]="[movement.receiptUrl]" height="140px" alt="">
+        <p class="text-muted">Foto comprobante</p>
       </div>
-      <div class="col-6">
-        <p class="text-muted small mb-1">Fecha</p>
-        <p>{{ movement.createdAt }}</p>
-      </div>
-    </div>
-
-    <!-- Receipt Image -->
-    <div class="row mb-3">
-      <div class="col-8">
-        <p class="fw-medium">Imagen comprobante</p>
-        <img [src]="[movement.receiptUrl]" height="200px" alt="">
-      </div>
-      <div class="col-4">
-        <br>
+      <div class="col-4 text-center">
         <div>
           <button type="button" class="btn btn-light p-3">
             <i class="fa-solid fa-camera fa-2xl"></i>
@@ -103,24 +139,5 @@
         </div>
       </div>
     </div>
-
-    <!-- Buttons -->
-    <div class="row">
-      <div class="col-6">
-        <button type="reset" class="btn btn-danger w-100">
-          <i class="fa-solid fa-xmark me-2"></i>
-          Cancelar
-        </button>
-      </div>
-
-
-      <div class="col-6">
-        <button type="submit" class="btn btn-success w-100">
-          <i class="fa-solid fa-floppy-disk me-2"></i>
-          Guardar
-        </button>
-      </div>
-    </div>
-
   </form>
 </div>

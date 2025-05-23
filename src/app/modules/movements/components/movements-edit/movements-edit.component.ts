@@ -20,7 +20,7 @@ export class MovementsEditComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private movementsService = inject(MovementsService);
   private router = inject(Router);
-  private location = inject(Location);
+  public location = inject(Location);
 
   /** variables **/
   public movement: Movement = {} as Movement;

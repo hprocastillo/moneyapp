@@ -1,5 +1,7 @@
 export interface Movement {
   id: string;
+  group: boolean;
+  groupId: string;
   typeMovement: 'INGRESO' | 'EGRESO';
   paymentMethod: 'EFECTIVO' | 'YAPE' | 'TARJETA' | 'TRANSFERENCIA';
   description: string;
