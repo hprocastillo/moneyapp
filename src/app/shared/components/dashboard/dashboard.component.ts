@@ -4,7 +4,7 @@ import {
   MovementsCurrentComponent
 } from '../../../modules/movements/components/movements-current/movements-current.component';
 import {NgbDropdownConfig, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
-import {AuthService} from '../../../modules/auth/services/auth.service';
+import {AuthService} from '../../../modules/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',

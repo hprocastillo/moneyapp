@@ -1,63 +1,36 @@
 import {Routes} from '@angular/router';
-import {SigninComponent} from './modules/auth/components/signin/signin.component';
-import {ShareComponent} from './modules/share/components/share/share.component';
-import {MovementsNewComponent} from './modules/movements/components/movements-new/movements-new.component';
-import {SettingsComponent} from './shared/components/settings/settings.component';
-import {HomeComponent} from './shared/components/home/home.component';
-import {DashboardComponent} from './shared/components/dashboard/dashboard.component';
 import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
-import {MovementsListComponent} from './modules/movements/components/movements-list/movements-list.component';
-import {MovementsViewComponent} from './modules/movements/components/movements-view/movements-view.component';
-import {MovementsEditComponent} from './modules/movements/components/movements-edit/movements-edit.component';
-import {GroupsListComponent} from './modules/groups/components/groups-list/groups-list.component';
-import {GroupsNewComponent} from './modules/groups/components/groups-new/groups-new.component';
-import {GroupsViewComponent} from './modules/groups/components/groups-view/groups-view.component';
-import {GroupsEditComponent} from './modules/groups/components/groups-edit/groups-edit.component';
+import {NoAuthGuard} from './modules/auth/guards/no-auth.guard';
+import {AuthGuard} from './modules/auth/guards/auth.guard';
 
 export const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'auth',
+    canActivate: [NoAuthGuard],
+    loadChildren: () => import('./modules/auth/auth.routes').then(m => m.AUTH_ROUTES),
   },
   {
-    path: 'home', component: HomeComponent
+    path: 'dashboard',
+    canActivate: [AuthGuard],
+    loadComponent: () => import('./shared/components/dashboard/dashboard.component').then(m => m.DashboardComponent)
   },
   {
-    path: 'auth', component: SigninComponent
+    path: 'movements',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/movements/movements.routes').then(m => m.MOVEMENTS_ROUTES),
   },
   {
-    path: 'settings', component: SettingsComponent
+    path: 'customers',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/customers/customers.routes').then(m => m.CUSTOMERS_ROUTES),
   },
   {
-    path: 'dashboard', component: DashboardComponent
+    path: 'projects',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/projects/projects.routes').then(m => m.PROJECTS_ROUTES),
   },
   {
-    path: 'movements/list', component: MovementsListComponent
-  },
-  {
-    path: 'movements/new', component: MovementsNewComponent
-  },
-  {
-    path: 'movements/view/:id', component: MovementsViewComponent
-  },
-  {
-    path: 'movements/edit/:id', component: MovementsEditComponent
-  },
-  {
-    path: 'groups/list', component: GroupsListComponent
-  },
-  {
-    path: 'groups/new', component: GroupsNewComponent
-  },
-  {
-    path: 'groups/view/:id', component: GroupsViewComponent
-  },
-  {
-    path: 'groups/edit/:id', component: GroupsEditComponent
-  },
-  {
-    path: 'share', component: ShareComponent
+    path: '', redirectTo: 'auth', pathMatch: 'full',
   },
   {
     path: '**', component: PageNotFoundComponent
