@@ -2,16 +2,12 @@ import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MovementsService} from '../../services/movements.service';
 import {Movement} from '../../interfaces/movement';
-import {DecimalPipe, Location, NgIf} from '@angular/common';
+import {Location, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-movements-edit',
-  imports: [
-    DecimalPipe,
-    NgIf,
-    FormsModule
-  ],
+  imports: [NgIf, FormsModule],
   templateUrl: './movements-edit.component.html',
   styleUrl: './movements-edit.component.scss'
 })
@@ -32,11 +28,6 @@ export class MovementsEditComponent implements OnInit {
     })
     console.log(id);
   }
-
-  goBack() {
-    this.location.back();
-  }
-
 
   save(): void {
     if (this.movement) {

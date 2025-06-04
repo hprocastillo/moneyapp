@@ -1,16 +1,12 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DatePipe, DecimalPipe, Location, NgIf} from '@angular/common';
+import {DecimalPipe, Location, NgIf} from '@angular/common';
 import {MovementsService} from '../../services/movements.service';
 import {Movement} from '../../interfaces/movement';
 
 @Component({
   selector: 'app-movements-view',
-  imports: [
-    NgIf,
-    DecimalPipe,
-    DatePipe
-  ],
+  imports: [NgIf, DecimalPipe,],
   templateUrl: './movements-view.component.html',
   styleUrl: './movements-view.component.scss'
 })

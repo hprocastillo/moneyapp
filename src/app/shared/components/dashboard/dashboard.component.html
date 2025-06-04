@@ -4,10 +4,16 @@
     <h3>MoneyApp</h3>
   </div>
   <div class="col-4 d-flex justify-content-between">
-    <button type="button" class="btn btn-light rounded-circle" (click)="router.navigate(['/settings'])">
-      <i class="fa-solid fa-ellipsis-vertical"></i>
-    </button>
+    <div ngbDropdown>
+      <button type="button" class="btn btn-light rounded-circle" id="dropdownBasic1" ngbDropdownToggle>
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </button>
 
+      <div ngbDropdownMenu>
+        <button ngbDropdownItem (click)="router.navigate(['/settings'])">Ajustes</button>
+        <button ngbDropdownItem (click)="logout()">Cerrar sesión</button>
+      </div>
+    </div>
     <button type="button" class="btn btn-success rounded-circle" (click)="router.navigate(['/movements/new'])">
       <i class="fa-solid fa-plus fa-xl"></i>
     </button>
