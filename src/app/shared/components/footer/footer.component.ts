@@ -1,4 +1,4 @@
-import {Component, computed, inject} from '@angular/core';
+import {Component, computed, inject, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../modules/auth/auth.service';
 import {NgIf} from '@angular/common';
@@ -10,6 +10,10 @@ import {NgIf} from '@angular/common';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
+  /** Inputs **/
+  @Input() show:boolean | undefined;
+
+
   /** injects **/
   public auth = inject(AuthService);
   public router = inject(Router);

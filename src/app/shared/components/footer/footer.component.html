@@ -1,4 +1,4 @@
-<div *ngIf="isLoggedIn()" class="row fixed-bottom bg-dark">
+<div *ngIf="show === true" class="row fixed-bottom bg-dark">
   <div class="d-flex justify-content-between">
 
     <button (click)="router.navigate(['dashboard'])" class="btn btn-dark me-2" type="button">

@@ -1,25 +1,27 @@
-<!-- HEADER -->
-<div class="row">
+<!--***** HEADER *****-->
+<div class="row border-bottom mb-3 pb-2">
   <div class="col-8">
-    <h3>ProValencia</h3>
+    <h3 class="mt-3">ProValencia</h3>
   </div>
   <div class="col-4 d-flex justify-content-between">
     <div ngbDropdown>
       <button class="btn btn-light rounded-circle" id="dropdownBasic1" ngbDropdownToggle type="button">
         <i class="fa-solid fa-ellipsis-vertical"></i>
       </button>
-
       <div ngbDropdownMenu>
         <button (click)="router.navigate(['/settings'])" ngbDropdownItem>Ajustes</button>
         <button (click)="logout()" ngbDropdownItem>Cerrar sesión</button>
       </div>
     </div>
     <button (click)="router.navigate(['/movements/new'])" class="btn btn-success rounded-circle" type="button">
-      <i class="fa-solid fa-plus fa-xl"></i>
+      <i class="fa-solid fa-plus fa-lg"></i>
     </button>
   </div>
 </div>
-<hr class="text-muted">
+
 
 <!-- CURRENTS MOVEMENTS -->
 <app-movements-current></app-movements-current>
+
+<!-- FOOTER -->
+ <app-footer [show]="true"></app-footer>

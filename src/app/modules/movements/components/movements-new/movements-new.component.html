@@ -1,23 +1,17 @@
+<!--***** HEADER *****-->
+<div class="row border-bottom mb-3">
+  <div class="col-1">
+    <i  (click)="location.back()"class="fa-solid fa-arrow-left-long"></i>
+  </div>
+  <div class="col-10 text-center">
+    <h5>Nuevo</h5>
+  </div>
+</div>
+
 <!--***** FORM *****-->
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-  <!-- Header -->
-  <div class="row mb-3">
-    <div class="col-1">
-      <i (click)="location.back()" class="fa-solid fa-chevron-left"></i>
-    </div>
-    <div class="col-7">
-      <h5 class="text-uppercase">nuevo</h5>
-    </div>
-    <div class="col-4 text-end">
-      <button class="btn btn-danger me-2" type="reset">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <button class="btn btn-success" type="submit">
-        <i class="fa-solid fa-floppy-disk"></i>
-      </button>
-    </div>
-  </div>
+
 
 
   <!-- Type Movement -->

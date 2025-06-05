@@ -5,10 +5,11 @@ import {
 } from '../../../modules/movements/components/movements-current/movements-current.component';
 import {NgbDropdownConfig, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../../modules/auth/auth.service';
+import {FooterComponent} from '../footer/footer.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [MovementsCurrentComponent, NgbDropdownModule],
+  imports: [MovementsCurrentComponent, NgbDropdownModule, FooterComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
