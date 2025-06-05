@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {NgbDatepicker, NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
+import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {debounceTime, distinctUntilChanged, map, Observable, OperatorFunction} from 'rxjs';
@@ -17,7 +17,7 @@ const groups = [
   selector: 'app-groups-list',
   imports: [
     FormsModule,
-     NgbTypeahead
+    NgbTypeahead
   ],
   templateUrl: './groups-list.component.html',
   styleUrl: './groups-list.component.scss'

@@ -1,49 +1,39 @@
-<!--***** Header *****-->
-<div class="row mb-3">
-  <div class="col-1">
-    <i class="fa-solid fa-chevron-left" (click)="location.back()"></i>
-  </div>
-  <div class="col-11">
-    <h5 class="text-uppercase">nuevo movimiento</h5>
-  </div>
-</div>
+<!--***** FORM *****-->
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-<form>
+  <!-- Header -->
   <div class="row mb-3">
-    <div class="col-5 pe-0">
-      <div class="form-floating">
-        <select class="form-select" id="typeSelect">
-          <option selected>Movimiento</option>
-          <option value="1">INGRESO</option>
-          <option value="2">EGRESO</option>
-        </select>
-        <label for="typeSelect">Tipo</label>
-      </div>
+    <div class="col-1">
+      <i (click)="location.back()" class="fa-solid fa-chevron-left"></i>
     </div>
     <div class="col-7">
-      <div class="form-floating">
-        <select class="form-select" id="groupSelect">
-          <option selected>Ninguno</option>
-          <option value="1">Proyecto Chorrillos</option>
-          <option value="2">Cumpleaños de mamá</option>
-        </select>
-        <label for="groupSelect">Grupo</label>
-      </div>
+      <h5 class="text-uppercase">nuevo</h5>
+    </div>
+    <div class="col-4 text-end">
+      <button class="btn btn-danger me-2" type="reset">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <button class="btn btn-success" type="submit">
+        <i class="fa-solid fa-floppy-disk"></i>
+      </button>
     </div>
   </div>
 
-  <!--***** Type movement *****-->
 
+  <!-- Type Movement -->
+  <div class="form-floating mb-3">
+    <select class="form-select" id="typeSelect" formControlName="type" required>
+      <option value="INGRESO">INGRESO</option>
+      <option value="EGRESO">EGRESO</option>
+    </select>
+    <label for="typeSelect">Tipo de movimiento</label>
+  </div>
 
   <!--***** Description *****-->
   <div class="form-floating mb-3">
-    <input
-      type="text"
-      class="form-control"
-      id="description"
-      placeholder="Descripción"
-    >
-    <label for="description">Descripción</label>
+    <input type="text" class="form-control" id="descriptionInput" placeholder="Descripción"
+           formControlName="description" required>
+    <label for="descriptionInput">Descripción</label>
   </div>
 
   <!--***** Amount and Payment method *****-->
@@ -51,72 +41,97 @@
     <div class="col-5 pe-0">
       <!-- amount -->
       <div class="form-floating">
-        <input
-          type="number"
-          class="form-control"
-          id="amount"
-          placeholder="S/. Monto"
-        >
-        <label for="amount">S/. Monto</label>
+        <input type="number" class="form-control" id="amountInput" placeholder="Monto S/." formControlName="amount"
+               required>
+        <label for="amountInput">Monto S/.</label>
       </div>
     </div>
     <div class="col-7">
       <!-- payment method -->
       <div class="form-floating">
-        <select class="form-select" id="paymentMethod" aria-label="Floating label select example">
-          <option selected>Seleccionar</option>
+        <select class="form-select" id="paymentSelect" formControlName="paymentMethod" required>
           <option value="EFECTIVO">EFECTIVO</option>
           <option value="YAPE">YAPE</option>
           <option value="TARJETA">TARJETA</option>
           <option value="TRANSFERENCIA">TRANSFERENCIA</option>
         </select>
-        <label for="paymentMethod">Medio de pago</label>
+        <label for="paymentSelect">Metodo de pago</label>
       </div>
     </div>
   </div>
 
   <!--***** comments *****-->
   <div class="form-floating mb-3">
-    <textarea
-      class="form-control"
-      placeholder="Observaciones"
-      id="comments"
-      style="height: 80px"
-    ></textarea>
-    <label for="comments">Observaciones</label>
+ <textarea class="form-control" placeholder="Observaciones" id="commentsTextarea"
+           formControlName="comments" style="height: 120px;"></textarea>
+    <label for="commentsTextarea">Observaciones</label>
   </div>
 
   <!--***** photo receipt *****-->
-  <div class="row">
-    <div class="col-12">
-      <p class="text-muted">Adjuntar imagen de comprobante</p>
-    </div>
+  <div *ngIf="imagePreviewUrl; else noPreview">
+    <img [src]="imagePreviewUrl" alt="Preview" class="img-thumbnail w-100">
+    <button type="button"
+            class="btn btn-sm btn-danger position-absolute top-0 end-0"
+            style="transform: translate(30%,-30%);"
+            (click)="removeSelectedImage()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
   </div>
-  <div class="row mb-3">
-    <div class="col-6 text-center">
-      <button type="button" class="btn btn-light p-3">
-        <i class="fa-solid fa-camera fa-2xl"></i>
-      </button>
-      <p class="small">Tomar foto</p>
+
+  <ng-template #noPreview>
+    <div class="row">
+      <div class="col-12">
+        <p class="text-muted">Adjuntar imagen de comprobante</p>
+      </div>
     </div>
-    <div class="col-6 text-center">
-      <button type="button" class="btn btn-light p-3">
-        <i class="fa-solid fa-folder-open fa-2xl"></i>
-      </button>
-      <p class="small">Subir imagen</p>
+    <div class="row mb-3">
+      <div class="col-6 text-center">
+        <button class="btn btn-light p-3" type="button" (click)="cameraInput.click()">
+          <i class="fa-solid fa-camera fa-2xl"></i>
+          <!-- input file oculto para cámara -->
+          <input #cameraInput
+                 type="file"
+                 accept="image/*"
+                 capture="environment"
+                 style="display: none"
+                 (change)="onImageSelected($event)">
+        </button>
+        <p class="small">Tomar foto</p>
+        <!--        <button class="btn btn-light p-3" type="button">-->
+        <!--          <i class="fa-solid fa-camera fa-2xl"></i>-->
+        <!--        </button>-->
+        <!--        <p class="small">Tomar foto</p>-->
+      </div>
+      <div class="col-6 text-center">
+        <button class="btn btn-light p-3" type="button" (click)="uploadInput.click()">
+          <i class="fa-solid fa-folder-open fa-2xl"></i>
+          <!-- input file oculto para galería -->
+          <input #uploadInput
+                 type="file"
+                 accept="image/*"
+                 style="display: none"
+                 (change)="onImageSelected($event)">
+        </button>
+        <p class="small">Subir imagen</p>
+        <!--        <button class="btn btn-light p-3" type="button">-->
+        <!--          <i class="fa-solid fa-folder-open fa-2xl"></i>-->
+        <!--        </button>-->
+        <!--        <p class="small">Subir imagen</p>-->
+      </div>
     </div>
-  </div>
+  </ng-template>
+
 
   <!--***** buttons *****-->
   <div class="row">
     <div class="col-6">
-      <button type="reset" class="btn btn-danger w-100">
+      <button class="btn btn-danger w-100" type="reset">
         <i class="fa-solid fa-xmark me-2"></i>
         Cancelar
       </button>
     </div>
     <div class="col-6">
-      <button type="submit" class="btn btn-success w-100">
+      <button class="btn btn-success w-100" type="submit">
         <i class="fa-solid fa-floppy-disk me-2"></i>
         Guardar
       </button>

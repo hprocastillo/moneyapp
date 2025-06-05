@@ -1,16 +1,18 @@
+import {Timestamp} from '@angular/fire/firestore';
+
 export interface Movement {
   id: string;
-  group: boolean;
-  groupId: string;
-  typeMovement: 'INGRESO' | 'EGRESO';
-  paymentMethod: 'EFECTIVO' | 'YAPE' | 'TARJETA' | 'TRANSFERENCIA';
+  type: "INGRESO" | "EGRESO";
+  paymentMethod: "EFECTIVO" | "YAPE" | "TARJETA" | "TRANSFERENCIA";
   description: string;
   amount: number;
-  comments: string;
   receiptUrl: string;
+  comments: string;
 
   createdBy: string;
-  createdAt: string;
+  createdByName?: string;
+  createdAt: Timestamp;
   updatedBy: string;
-  updatedAt: string;
+  updatedByName?: string;
+  updatedAt: Timestamp
 }

@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DecimalPipe, Location, NgIf} from '@angular/common';
-import {MovementsService} from '../../services/movements.service';
+import {MovementsService} from '../../movements.service';
 import {Movement} from '../../interfaces/movement';
 
 @Component({
@@ -14,12 +14,10 @@ export class MovementsViewComponent implements OnInit {
   /** injects **/
   public router = inject(Router);
   public location = inject(Location);
-  private route = inject(ActivatedRoute);
-  private movementsService = inject(MovementsService);
-
-
   /** variables **/
   public movement = {} as Movement;
+  private route = inject(ActivatedRoute);
+  private movementsService = inject(MovementsService);
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;

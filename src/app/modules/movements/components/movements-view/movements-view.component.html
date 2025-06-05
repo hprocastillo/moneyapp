@@ -2,17 +2,17 @@
 <div *ngIf="movement">
   <div class="row mb-4">
     <div class="col-1">
-      <i class="fa-solid fa-chevron-left" (click)="location.back()"></i>
+      <i (click)="location.back()" class="fa-solid fa-chevron-left"></i>
     </div>
     <div class="col-7">
       <h5 class="text-uppercase">detalle</h5>
     </div>
     <div class="col-4 text-end">
-      <button type="button" class="btn btn-secondary btn-sm me-2"
-              (click)="router.navigate(['/movements/edit',movement.id])">
+      <button (click)="router.navigate(['/movements/edit',movement.id])" class="btn btn-secondary btn-sm me-2"
+              type="button">
         <i class="fa-solid fa-pen-to-square"></i>
       </button>
-      <button type="button" class="btn btn-danger btn-sm">
+      <button class="btn btn-danger btn-sm" type="button">
         <i class="fa-solid fa-trash"></i>
       </button>
     </div>
@@ -20,13 +20,9 @@
 
   <!--***** Movements Detail *****-->
   <div class="row mb-3">
-    <div class="col-6 text-start">
+    <div class="col-12 text-start">
       <p class="text-muted small mb-0">Tipo movimiento</p>
-      <p class="fw-medium mb-0">{{ movement.typeMovement }}</p>
-    </div>
-    <div class="col-6 text-end">
-      <p class="text-muted small mb-0">Grupo</p>
-      <p class="fw-medium mb-0">{{ movement.groupId }}</p>
+      <p class="fw-medium mb-0">{{ movement.type }}</p>
     </div>
   </div>
 
@@ -61,7 +57,7 @@
 
   <div class="row">
     <div class="col-12 text-center">
-      <img height="150px" [src]="[movement.receiptUrl]" alt="">
+      <img [src]="[movement.receiptUrl]" alt="" height="150px">
       <p class="text-muted">Foto comprobante</p>
     </div>
   </div>

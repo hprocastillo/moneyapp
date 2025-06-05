@@ -14,13 +14,13 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  async loginWithGoogle() {
+  async loginWithGoogle(): Promise<void> {
     try {
       await this.authService.loginWithGoogle();
       await this.router.navigate(['/dashboard']);
 
-    } catch (e: any) {
-      alert(e.message || 'Error de autenticación');
+    } catch (error: any) {
+      alert(error.message || 'Error de autenticación');
     }
   }
 }

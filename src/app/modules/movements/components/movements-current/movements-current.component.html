@@ -1,27 +1,39 @@
 <div class="row">
-  <div class="col-6">
-    <p class="mb-2 fw-medium small text-capitalize">Mis gastos</p>
-    <h5 class="mt-2 text-danger">S/. 2630</h5>
-  </div>
-  <div class="col-6 text-end">
-    <p class="mb-2 fw-medium small text-capitalize">Mis ingresos</p>
-    <h5 class="mt-2">S/. 1410</h5>
+  <div class="col">
+    <h5 class="mb-0">
+      Saldo del mes:
+      <span [ngClass]="{'text-success': sumatoria >= 0, 'text-danger': sumatoria < 0}">
+      S/. {{ sumatoria | number: '1.2-2' }}
+    </span>
+    </h5>
   </div>
 </div>
+<!--<div class="row">-->
+<!--  <div class="col-6">-->
+<!--    <p class="mb-2 fw-medium small text-capitalize">Mis ingresos</p>-->
+<!--    <h5 class="mt-2 text-success">S/. {{ ingresos | number: '1.2-2' }}</h5>-->
+<!--  </div>-->
+<!--  <div class="col-6 text-end">-->
+<!--    <p class="mb-2 fw-medium small text-capitalize">Mis egresos</p>-->
+<!--    <h5 class="mt-2 text-danger">S/. {{ egresos | number: '1.2-2' }}</h5>-->
+<!--  </div>-->
+<!--</div>-->
 <br>
 
 <!-- LIST -->
 <div class="row">
   <div class="col-12">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item ps-0 pe-0" (click)="goView('1')">
+
+      <li *ngFor="let m of filteredMovements" class="list-group-item ps-0 pe-0" (click)="goView('1')">
         <div class="row">
           <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
+            <p class="fw-medium mb-0">{{ m.description }}</p>
+            <p class="small text-muted mb-0">{{ m.createdAt.toDate() | date:'medium' }}</p>
           </div>
           <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
+            <p *ngIf="m.type==='INGRESO'" class="mt-2 text-success">S/. {{ m.amount | number: '1.2-2' }}</p>
+            <p *ngIf="m.type==='EGRESO'" class="mt-2 text-danger">S/. -{{ m.amount | number: '1.2-2' }}</p>
           </div>
           <div class="col-1 pt-2">
             <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
@@ -29,110 +41,6 @@
         </div>
       </li>
 
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
-
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
-
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
-
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
-
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
-
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
-
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
     </ul>
   </div>
 </div>

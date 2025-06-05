@@ -1,19 +1,19 @@
 <div *ngIf="movement">
-  <form (ngSubmit)="save()" #f="ngForm">
+  <form>
 
     <!--***** Header *****-->
     <div class="row mb-3">
       <div class="col-1">
-        <i class="fa-solid fa-chevron-left" (click)="location.back()"></i>
+        <i (click)="location.back()" class="fa-solid fa-chevron-left"></i>
       </div>
       <div class="col-7">
         <h5 class="text-uppercase">editar</h5>
       </div>
       <div class="col-4 text-end">
-        <button type="reset" class="btn btn-danger btn-sm me-2">
+        <button class="btn btn-danger btn-sm me-2" type="reset">
           <i class="fa-solid fa-xmark"></i>
         </button>
-        <button type="submit" class="btn btn-success btn-sm">
+        <button class="btn btn-success btn-sm" type="submit">
           <i class="fa-solid fa-floppy-disk"></i>
         </button>
       </div>
@@ -22,13 +22,13 @@
 
     <!--***** Type movement and group *****-->
     <div class="row mb-3">
-      <div class="col-5 pe-0">
+      <div class="col-12 pe-0">
         <div class="form-floating">
           <select
+            [(ngModel)]="movement.type"
             class="form-select"
             id="typeSelect"
             name="typeMovement"
-            [(ngModel)]="movement.typeMovement"
             required>
             <option selected>Movimiento</option>
             <option value="INGRESO">INGRESO</option>
@@ -37,34 +37,19 @@
           <label for="typeSelect">Tipo</label>
         </div>
       </div>
-      <div class="col-7">
-        <div class="form-floating">
-          <select
-            class="form-select"
-            id="groupSelect"
-            name="groupId"
-            [(ngModel)]="movement.groupId"
-            required>
-            <option selected>NINGUNO</option>
-            <option value="Proyecto Chorrillos">Proyecto Chorrillos</option>
-            <option value="Cumpleaños de mamá">Cumpleaños de mamá</option>
-          </select>
-          <label for="groupSelect">Grupo</label>
-        </div>
-      </div>
     </div>
 
 
     <!--***** Description *****-->
     <div class="form-floating mb-3">
       <input
-        type="text"
+        [(ngModel)]="movement.description"
         class="form-control"
         id="descriptionInput"
         name="description"
-        [(ngModel)]="movement.description"
         placeholder="Descripción"
-        required>
+        required
+        type="text">
       <label for="descriptionInput">Descripción</label>
     </div>
 
@@ -74,13 +59,13 @@
         <!-- amount -->
         <div class="form-floating">
           <input
-            type="number"
+            [(ngModel)]="movement.amount"
             class="form-control"
             id="amountInput"
             name="amount"
-            [(ngModel)]="movement.amount"
             placeholder="Monto S/."
-            required>
+            required
+            type="number">
           <label for="amountInput">Monto S/.</label>
         </div>
       </div>
@@ -88,10 +73,10 @@
         <!-- payment method -->
         <div class="form-floating">
           <select
+            [(ngModel)]="movement.paymentMethod"
             class="form-select"
             id="paymentSelect"
             name="paymentMethod"
-            [(ngModel)]="movement.paymentMethod"
             required>
             <option selected>Seleccionar</option>
             <option value="EFECTIVO">EFECTIVO</option>
@@ -107,13 +92,13 @@
     <!--***** comments *****-->
     <div class="form-floating mb-3">
     <textarea
+      [(ngModel)]="movement.comments"
       class="form-control"
-      placeholder="Observaciones"
       id="commentsInput"
       name="comments"
-      [(ngModel)]="movement.comments"
-      style="height: 80px"
-      required>
+      placeholder="Observaciones"
+      required
+      style="height: 80px">
     </textarea>
       <label for="commentsInput">Observaciones</label>
     </div>
@@ -121,18 +106,18 @@
     <!--***** Receipt image *****-->
     <div class="row">
       <div class="col-8 text-center">
-        <img [src]="[movement.receiptUrl]" height="140px" alt="">
+        <img [src]="[movement.receiptUrl]" alt="" height="140px">
         <p class="text-muted">Foto comprobante</p>
       </div>
       <div class="col-4 text-center">
         <div>
-          <button type="button" class="btn btn-light p-3">
+          <button class="btn btn-light p-3" type="button">
             <i class="fa-solid fa-camera fa-2xl"></i>
           </button>
           <p class="small">Tomar foto</p>
         </div>
         <div>
-          <button type="button" class="btn btn-light p-3">
+          <button class="btn btn-light p-3" type="button">
             <i class="fa-solid fa-folder-open fa-2xl"></i>
           </button>
           <p class="small">Subir imagen</p>

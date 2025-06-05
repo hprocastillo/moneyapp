@@ -8,10 +8,7 @@ import {AuthService} from '../../../modules/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [
-    MovementsCurrentComponent,
-    NgbDropdownModule
-  ],
+  imports: [MovementsCurrentComponent, NgbDropdownModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -19,7 +16,6 @@ export class DashboardComponent {
   /** injects **/
   public router = inject(Router);
   private authService = inject(AuthService);
-
 
   constructor(config: NgbDropdownConfig) {
     config.autoClose = false;

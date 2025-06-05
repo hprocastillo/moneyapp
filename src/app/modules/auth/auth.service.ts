@@ -15,12 +15,11 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+  public userGuard$ = authState(inject(Auth));
   /** injects **/
   private auth = inject(Auth);
   private firestore = inject(Firestore);
   private router = inject(Router);
-  public userGuard$ = authState(inject(Auth));
-
   /** SIGNAL para el usuario autenticado (null si no está logueado) **/
   private userSignal = signal<User | null>(null);
 
@@ -38,6 +37,23 @@ export class AuthService {
         await this.updateLastLogin(firebaseUser.uid);
       }
     });
+  }
+
+  /** Acceso al uid, email, etc. **/
+  get uid(): string | null {
+    return this.userSignal()?.uid || null;
+  }
+
+  get email(): string | null {
+    return this.userSignal()?.email || null;
+  }
+
+  get displayName(): string | null {
+    return this.userSignal()?.displayName || null;
+  }
+
+  get photoURL(): string | null {
+    return this.userSignal()?.photoURL || null;
   }
 
   /** Login SOLO con Google **/
@@ -81,22 +97,5 @@ export class AuthService {
     await updateDoc(userRef, {
       lastLogin: Timestamp.now(),
     });
-  }
-
-  /** Acceso al uid, email, etc. **/
-  get uid(): string | null {
-    return this.userSignal()?.uid || null;
-  }
-
-  get email(): string | null {
-    return this.userSignal()?.email || null;
-  }
-
-  get displayName(): string | null {
-    return this.userSignal()?.displayName || null;
-  }
-
-  get photoURL(): string | null {
-    return this.userSignal()?.photoURL || null;
   }
 }

@@ -1,16 +1,16 @@
 <!--***** Header *****-->
 <div class="row mb-3">
   <div class="col-1">
-    <i class="fa-solid fa-chevron-left" (click)="location.back()"></i>
+    <i (click)="location.back()" class="fa-solid fa-chevron-left"></i>
   </div>
   <div class="col-7">
     <h5 class="text-uppercase">movimientos</h5>
   </div>
   <div class="col-4 d-flex justify-content-between">
-    <button type="button" class="btn btn-light rounded-circle" (click)="filterCollapsed = !filterCollapsed">
+    <button (click)="filterCollapsed = !filterCollapsed" class="btn btn-light rounded-circle" type="button">
       <i class="fa-solid fa-sliders"></i>
     </button>
-    <button type="button" class="btn btn-success rounded-circle" (click)="router.navigate(['/movements/new'])">
+    <button (click)="router.navigate(['/movements/new'])" class="btn btn-success rounded-circle" type="button">
       <i class="fa-solid fa-plus fa-xl"></i>
     </button>
   </div>
@@ -21,12 +21,12 @@
   <div class="col-12">
     <div class="form-floating mb-3">
       <input
-        type="text"
+        [(ngModel)]="model"
+        [ngbTypeahead]="search"
         class="form-control"
         id="searchText"
         placeholder="Buscar por descripcion"
-        [(ngModel)]="model"
-        [ngbTypeahead]="search"
+        type="text"
       >
       <label for="searchText">Buscar por descripción</label>
     </div>

@@ -1,20 +1,20 @@
 <!-- HEADER -->
 <div class="row">
   <div class="col-8">
-    <h3>MoneyApp</h3>
+    <h3>ProValencia</h3>
   </div>
   <div class="col-4 d-flex justify-content-between">
     <div ngbDropdown>
-      <button type="button" class="btn btn-light rounded-circle" id="dropdownBasic1" ngbDropdownToggle>
+      <button class="btn btn-light rounded-circle" id="dropdownBasic1" ngbDropdownToggle type="button">
         <i class="fa-solid fa-ellipsis-vertical"></i>
       </button>
 
       <div ngbDropdownMenu>
-        <button ngbDropdownItem (click)="router.navigate(['/settings'])">Ajustes</button>
-        <button ngbDropdownItem (click)="logout()">Cerrar sesión</button>
+        <button (click)="router.navigate(['/settings'])" ngbDropdownItem>Ajustes</button>
+        <button (click)="logout()" ngbDropdownItem>Cerrar sesión</button>
       </div>
     </div>
-    <button type="button" class="btn btn-success rounded-circle" (click)="router.navigate(['/movements/new'])">
+    <button (click)="router.navigate(['/movements/new'])" class="btn btn-success rounded-circle" type="button">
       <i class="fa-solid fa-plus fa-xl"></i>
     </button>
   </div>

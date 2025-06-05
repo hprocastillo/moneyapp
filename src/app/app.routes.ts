@@ -12,7 +12,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
-    loadComponent: () => import('./shared/components/dashboard/dashboard.component').then(m => m.DashboardComponent)
+    loadComponent: () => import('./shared/components/dashboard/dashboard.component').then(m => m.DashboardComponent),
   },
   {
     path: 'movements',

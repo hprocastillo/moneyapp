@@ -1,13 +1,13 @@
 <!--***** Header *****-->
 <div class="row mb-3">
   <div class="col-1">
-    <i class="fa-solid fa-chevron-left" (click)="location.back()"></i>
+    <i (click)="location.back()" class="fa-solid fa-chevron-left"></i>
   </div>
   <div class="col-9">
     <h5 class="text-uppercase">grupos</h5>
   </div>
   <div class="col-2 d-flex justify-content-end">
-    <button type="button" class="btn btn-success rounded-circle" (click)="router.navigate(['/groups/new'])">
+    <button (click)="router.navigate(['/groups/new'])" class="btn btn-success rounded-circle" type="button">
       <i class="fa-solid fa-plus fa-xl"></i>
     </button>
   </div>
@@ -18,12 +18,12 @@
   <div class="col-12">
     <div class="form-floating mb-3">
       <input
-        type="text"
+        [(ngModel)]="model"
+        [ngbTypeahead]="search"
         class="form-control"
         id="searchText"
         placeholder="Buscar por grupo"
-        [(ngModel)]="model"
-        [ngbTypeahead]="search"
+        type="text"
       >
       <label for="searchText">Buscar por grupo</label>
     </div>
