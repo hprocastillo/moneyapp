@@ -1,62 +1,20 @@
-<!--***** Header *****-->
-<div class="row mb-3">
+<!--***** HEADER *****-->
+<div class="row border-bottom mb-2 pb-2">
   <div class="col-1">
-    <i (click)="location.back()" class="fa-solid fa-chevron-left"></i>
+    <i (click)="location.back()" class="fa-solid fa-arrow-left-long fa-lg"></i>
   </div>
-  <div class="col-7">
-    <h5 class="text-uppercase">movimientos</h5>
+  <div class="col-9 text-center">
+    <h5>Movimientos</h5>
   </div>
-  <div class="col-4 d-flex justify-content-between">
-    <button (click)="filterCollapsed = !filterCollapsed" class="btn btn-light rounded-circle" type="button">
-      <i class="fa-solid fa-sliders"></i>
-    </button>
-    <button (click)="router.navigate(['/movements/new'])" class="btn btn-success rounded-circle" type="button">
+  <div class="col-2 text-end">
+    <button
+      type="button"
+      class="btn btn-success btn-sm rounded-circle"
+      (click)="router.navigate(['/movements/new'])"
+    >
       <i class="fa-solid fa-plus fa-xl"></i>
     </button>
   </div>
-</div>
-
-<!--***** search field *****-->
-<div class="row">
-  <div class="col-12">
-    <div class="form-floating mb-3">
-      <input
-        [(ngModel)]="model"
-        [ngbTypeahead]="search"
-        class="form-control"
-        id="searchText"
-        placeholder="Buscar por descripcion"
-        type="text"
-      >
-      <label for="searchText">Buscar por descripción</label>
-    </div>
-  </div>
-</div>
-
-<!--***** filters *****-->
-<div [ngbCollapse]="filterCollapsed">
-  <!-- filter by type -->
-  <div class="row mb-3">
-    <div class="col-8">
-      <div class="form-floating mb-3">
-        <select class="form-select" id="filterType">
-          <option selected>Seleccionar</option>
-          <option value="1">INGRESO</option>
-          <option value="2">EGRESO</option>
-        </select>
-        <label for="filterType">Filtrar por tipo:</label>
-      </div>
-    </div>
-  </div>
-
-  <!-- filter by date -->
-  <div class="row">
-    <div class="col-12">
-      <p class="mb-1">Filtrar por fecha:</p>
-      <ngb-datepicker #dp/>
-    </div>
-  </div>
-  <hr class="text-muted mb-3">
 </div>
 
 
@@ -187,3 +145,7 @@
     </ul>
   </div>
 </div>
+
+
+<!-- FOOTER -->
+<app-footer [show]="true"></app-footer>

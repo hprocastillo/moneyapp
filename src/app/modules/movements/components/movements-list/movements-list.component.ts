@@ -1,9 +1,9 @@
 import {Component, inject} from '@angular/core';
 import {Router} from '@angular/router';
-import {NgbCollapse, NgbDatepicker, NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, map, Observable, OperatorFunction} from 'rxjs';
 import {Location} from '@angular/common';
+import {FooterComponent} from '../../../../shared/components/footer/footer.component';
 
 const movements = [
   "ferreteria",
@@ -15,12 +15,7 @@ const movements = [
 
 @Component({
   selector: 'app-movements-list',
-  imports: [
-    NgbCollapse,
-    NgbDatepicker,
-    FormsModule,
-    NgbTypeahead,
-  ],
+  imports: [FormsModule, FooterComponent,],
   templateUrl: './movements-list.component.html',
   styleUrl: './movements-list.component.scss'
 })

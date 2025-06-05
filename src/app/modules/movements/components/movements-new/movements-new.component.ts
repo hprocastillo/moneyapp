@@ -1,4 +1,4 @@
-import {Component, ElementRef, inject, ViewChild} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MovementsService} from '../../movements.service';
 import {Location, NgIf} from '@angular/common';
@@ -13,9 +13,6 @@ import {Timestamp} from '@angular/fire/firestore';
   styleUrl: './movements-new.component.scss'
 })
 export class MovementsNewComponent {
-  @ViewChild('cameraInput') cameraInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('uploadInput') uploadInput!: ElementRef<HTMLInputElement>;
-
   /** injects **/
   public router = inject(Router);
   public location = inject(Location);
@@ -38,36 +35,20 @@ export class MovementsNewComponent {
       comments: ['']
     });
   }
-  public selectedImageFile: File | null = null;
 
-
-  onImageSelected(event: Event) {
+  onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
-      this.selectedImageFile = file;
+      this.selectedFile = file;
+
+      // Preview de la imagen
       const reader = new FileReader();
       reader.onload = () => {
         this.imagePreviewUrl = reader.result as string;
       };
       reader.readAsDataURL(file);
-      // Limpiar ambos inputs por si quieres tomar otra foto luego
-      this.cameraInput.nativeElement.value = '';
-      this.uploadInput.nativeElement.value = '';
     }
   }
-  // onFileSelected(event: Event) {
-  //   const file = (event.target as HTMLInputElement).files?.[0];
-  //   if (file) {
-  //     this.selectedFile = file;
-  //
-  //     // Preview de la imagen
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       this.imagePreviewUrl = reader.result as string;
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
 
   removeSelectedImage() {
     this.selectedFile = null;
@@ -94,7 +75,7 @@ export class MovementsNewComponent {
         movement.createdAt = Timestamp.fromDate(dateMovement);
         movement.updatedAt = Timestamp.fromDate(dateMovement);
         await this.service.createMovement(movement, this.selectedFile!);
-        await this.router.navigate(['/movements']);
+        await this.router.navigate(['/dashboard']);
       } catch (e: any) {
         this.error = e.message || 'Error al guardar';
       }

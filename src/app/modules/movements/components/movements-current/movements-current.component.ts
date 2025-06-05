@@ -13,7 +13,7 @@ import {DatePipe, DecimalPipe, NgClass, NgForOf, NgIf} from '@angular/common';
 })
 export class MovementsCurrentComponent implements OnInit {
   /** injects **/
-  private router = inject(Router);
+  public router = inject(Router);
   private movementsService: MovementsService = inject(MovementsService);
 
   /** variables **/
@@ -21,8 +21,6 @@ export class MovementsCurrentComponent implements OnInit {
   public users: User[] = [];
   public filteredMovements: Movement[] = [];
   public sumatoria: number = 0;
-  public ingresos: number = 0;
-  public egresos: number = 0;
   public years: number[] = [];
 
   /** Filters **/
@@ -52,7 +50,6 @@ export class MovementsCurrentComponent implements OnInit {
   applyFilters(): void {
     this.filteredMovements = this.movements.filter(movement => {
       let valid = true;
-
       if (this.selectedMonth && this.selectedYear) {
         const movDate = movement.createdAt.toDate();
         valid = valid &&
@@ -61,7 +58,6 @@ export class MovementsCurrentComponent implements OnInit {
       }
       return valid;
     });
-
     /** Sumar ingresos y egresos de los movimientos filtrados **/
     const ingresos = this.filteredMovements
       .filter(m => m.type === 'INGRESO')
@@ -69,9 +65,7 @@ export class MovementsCurrentComponent implements OnInit {
     const egresos = this.filteredMovements
       .filter(m => m.type === 'EGRESO')
       .reduce((acc, m) => acc + (m.amount || 0), 0);
-
-    this.egresos = egresos;
-    this.ingresos = ingresos;
     this.sumatoria = ingresos - egresos;
+    this.filteredMovements = this.filteredMovements.slice(0, 10);
   }
 }

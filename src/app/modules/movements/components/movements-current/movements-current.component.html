@@ -1,3 +1,4 @@
+<!--***** HEADER *****-->
 <div class="row">
   <div class="col">
     <h5 class="mb-0">
@@ -8,20 +9,10 @@
     </h5>
   </div>
 </div>
-<!--<div class="row">-->
-<!--  <div class="col-6">-->
-<!--    <p class="mb-2 fw-medium small text-capitalize">Mis ingresos</p>-->
-<!--    <h5 class="mt-2 text-success">S/. {{ ingresos | number: '1.2-2' }}</h5>-->
-<!--  </div>-->
-<!--  <div class="col-6 text-end">-->
-<!--    <p class="mb-2 fw-medium small text-capitalize">Mis egresos</p>-->
-<!--    <h5 class="mt-2 text-danger">S/. {{ egresos | number: '1.2-2' }}</h5>-->
-<!--  </div>-->
-<!--</div>-->
 <br>
 
-<!-- LIST -->
-<div class="row">
+<!--***** LIST *****-->
+<div class="row" style="padding-bottom: 70px">
   <div class="col-12">
     <ul class="list-group list-group-flush">
 
@@ -39,6 +30,9 @@
             <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
           </div>
         </div>
+      </li>
+      <li class="list-group-item ps-0 pe-0 text-center">
+        <a class="text-decoration-none text-dark fw-medium" (click)="router.navigate(['/movements/list'])">Ver todos</a>
       </li>
 
     </ul>

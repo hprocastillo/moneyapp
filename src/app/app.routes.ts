@@ -30,7 +30,7 @@ export const routes: Routes = [
     loadChildren: () => import('./modules/projects/projects.routes').then(m => m.PROJECTS_ROUTES),
   },
   {
-    path: '', redirectTo: 'auth', pathMatch: 'full',
+    path: '', redirectTo: 'dashboard', pathMatch: 'full',
   },
   {
     path: '**', component: PageNotFoundComponent
