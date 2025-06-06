@@ -16,3 +16,8 @@ export interface Movement {
   updatedByName?: string;
   updatedAt: Timestamp
 }
+
+export interface GroupedMovements {
+  label: string;
+  items: Movement[];
+}

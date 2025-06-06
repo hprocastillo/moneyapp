@@ -18,134 +18,51 @@
 </div>
 
 
-<!--***** list *****-->
-<div class="row">
+<!--***** LIST *****-->
+<div class="row" style="padding-bottom: 100px">
   <div class="col-12">
-
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
+    <div *ngFor="let group of groupedMovements">
+      <div class="month-label" style="font-weight: bold; margin: 16px 0 8px 0;">
+        {{ group.label }}
+      </div>
+      <div *ngFor="let movement of group.items">
+        <div>
+          <b>{{ movement.description }}</b>
+          <span>{{ movement.createdAt.toDate() | date: 'medium' }}</span>
+          <span [ngClass]="movement.amount > 0 ? 'text-success' : 'text-danger'">
+        {{ movement.amount | number:'1.2-2'  }}
+      </span>
         </div>
-      </li>
+      </div>
+    </div>
 
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
 
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
 
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
 
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
+<!--    <ul class="list-group list-group-flush">-->
 
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
+<!--      <li *ngFor="let m of movements" class="list-group-item ps-0 pe-0">-->
+<!--        <div class="row">-->
+<!--          <div class="col-7">-->
+<!--            <p class="fw-medium mb-0">{{ m.description }}</p>-->
+<!--            <p class="small text-muted mb-0">{{ m.createdAt.toDate() | date:'medium' }}</p>-->
+<!--          </div>-->
+<!--          <div class="col-4 text-end pe-0">-->
+<!--            <p *ngIf="m.type==='INGRESO'" class="mt-2 text-success">S/. {{ m.amount | number: '1.2-2' }}</p>-->
+<!--            <p *ngIf="m.type==='EGRESO'" class="mt-2 text-danger">S/. -{{ m.amount | number: '1.2-2' }}</p>-->
+<!--          </div>-->
+<!--          <div class="col-1 pt-2">-->
+<!--            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li class="list-group-item ps-0 pe-0 text-center">-->
+<!--        <a class="text-decoration-none text-dark fw-medium" (click)="router.navigate(['/movements/list'])">Ver todos</a>-->
+<!--      </li>-->
 
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
-
-      <li class="list-group-item ps-0 pe-0">
-        <div class="row">
-          <div class="col-7">
-            <p class="fw-medium mb-0">Ferreteria</p>
-            <p class="small text-muted mb-0">17 mayo, 10:40AM</p>
-          </div>
-          <div class="col-4 text-end pe-0">
-            <p class="mt-2">S/ 8,423.00</p>
-          </div>
-          <div class="col-1 pt-2">
-            <i class="fa-solid fa-chevron-right fa-xs" style="color:gray"></i>
-          </div>
-        </div>
-      </li>
-    </ul>
+<!--    </ul>-->
   </div>
 </div>
-
 
 <!-- FOOTER -->
 <app-footer [show]="true"></app-footer>
