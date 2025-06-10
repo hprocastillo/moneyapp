@@ -11,8 +11,8 @@ import {NgIf} from '@angular/common';
 })
 export class FooterComponent {
   /** Inputs **/
-  @Input() show:boolean | undefined;
-
+  @Input() show: boolean | undefined;
+  @Input() template: string | undefined;
 
   /** injects **/
   public auth = inject(AuthService);

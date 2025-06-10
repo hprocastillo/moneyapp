@@ -1,24 +1,45 @@
-<div *ngIf="show === true" class="row fixed-bottom bg-dark">
+<div *ngIf="show === true" class="row fixed-bottom bg-white p-3">
   <div class="d-flex justify-content-between">
 
-    <button (click)="router.navigate(['dashboard'])" class="btn btn-dark me-2" type="button">
-      <i class="fa-solid fa-house fa-xl" style="color:#ffffff;"></i>
+    <button
+      *ngIf="template==='CURRENT' ||'LIST'"
+      type="button"
+      class="btn btn-outline-dark me-1"
+      (click)="router.navigate(['dashboard'])"
+    >
+      <i class="fa-solid fa-house me-1"></i>
       <span style="font-size: 0.8rem">Inicio</span>
     </button>
 
-    <button (click)="router.navigate(['movements/list'])" class="btn btn-dark me-2" type="button">
-      <i class="fa-solid fa-money-bill-transfer fa-xl" style="color: #ffffff;"></i>
+    <button
+      *ngIf="template==='CURRENT'"
+      type="button"
+      class="btn btn-outline-primary me-1"
+      (click)="router.navigate(['movements/list'])"
+    >
+      <i class="fa-solid fa-money-bill-transfer me-1"></i>
       <span style="font-size: 0.8rem">Movimientos</span>
     </button>
 
-    <button (click)="router.navigate(['groups/list'])" class="btn btn-dark me-2" type="button">
-      <i class="fa-solid fa-user-group fa-xl" style="color:#ffffff;"></i>
+    <button
+      *ngIf="template==='CURRENT' ||'LIST'"
+      type="button"
+      class="btn btn-outline-success me-1"
+      (click)="router.navigate(['groups/list'])"
+    >
+      <i class="fa-solid fa-user-group me-1"></i>
       <span style="font-size: 0.8rem">Grupos</span>
+   </button>
+
+    <button
+      *ngIf="template==='LIST'"
+      type="button"
+      class="btn btn-outline-secondary me-1"
+      (click)="router.navigate(['/settings'])"
+    >
+      <i class="fa-solid fa-gears me-1"></i>
+      <span style="font-size: 0.8rem">Ajustes</span>
     </button>
 
-    <button (click)="router.navigate(['share'])" class="btn btn-dark" type="button">
-      <i class="fa-solid fa-share-from-square fa-xl" style="color: #ffffff;"></i>
-      <span style="font-size: 0.8rem">Compartir</span>
-    </button>
   </div>
 </div>

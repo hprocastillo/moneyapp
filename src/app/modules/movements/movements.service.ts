@@ -15,7 +15,7 @@ import {
 import {deleteObject, getDownloadURL, ref, Storage, uploadBytes} from '@angular/fire/storage';
 import {AuthService} from '../auth/auth.service';
 import {Movement} from './interfaces/movement';
-import {combineLatest, map, Observable} from 'rxjs';
+import {combineLatest, map, Observable, of, switchMap} from 'rxjs';
 import {User} from '../auth/interfaces/user';
 
 @Injectable({
@@ -56,9 +56,24 @@ export class MovementsService {
   /** ************************* **/
   /** Trae un movimiento por Id **/
   getMovementById(id: string): Observable<Movement> {
-    const docRef = doc(this.firestore, `movements/${id}`);
-    return docData(docRef, {idField: 'id'}) as Observable<Movement>;
+    const movementRef = doc(this.firestore, `movements/${id}`);
+    return docData(movementRef, { idField: 'id' }).pipe(
+      switchMap((movement: any) => {
+        if (!movement?.createdBy) return of(movement);
+        const userRef = doc(this.firestore, `users/${movement.createdBy}`);
+        return docData(userRef).pipe(
+          map((user: any) => ({
+            ...movement,
+            createdByName: user?.displayName ?? null
+          }))
+        );
+      })
+    );
   }
+  // getMovementById(id: string): Observable<Movement> {
+  //   const movementRef = doc(this.firestore, `movements/${id}`);
+  //   return docData(movementRef, {idField: 'id'}) as Observable<Movement>;
+  // }
 
   /** ********************** **/
   /** crear nuevo movimiento **/

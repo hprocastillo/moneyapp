@@ -1,96 +1,88 @@
-<div *ngIf="movement">
-  <form>
+<!--***** HEADER *****-->
+<div class="row border-bottom mb-2 pb-2">
+  <div class="col-1">
+    <i (click)="location.back()" class="fa-solid fa-arrow-left-long fa-lg"></i>
+  </div>
+  <div class="col-9 text-center">
+    <h5>Editar</h5>
+  </div>
+</div>
 
-    <!--***** Header *****-->
-    <div class="row mb-3">
-      <div class="col-1">
-        <i (click)="location.back()" class="fa-solid fa-chevron-left"></i>
-      </div>
-      <div class="col-7">
-        <h5 class="text-uppercase">editar</h5>
-      </div>
-      <div class="col-4 text-end">
-        <button class="btn btn-danger btn-sm me-2" type="reset">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-        <button class="btn btn-success btn-sm" type="submit">
-          <i class="fa-solid fa-floppy-disk"></i>
-        </button>
-      </div>
-    </div>
+<!--*****************************-->
+<!--*********** FORM ************-->
+<form>
 
-
-    <!--***** Type movement and group *****-->
-    <div class="row mb-3">
-      <div class="col-12 pe-0">
-        <div class="form-floating">
-          <select
-            [(ngModel)]="movement.type"
-            class="form-select"
-            id="typeSelect"
-            name="typeMovement"
-            required>
-            <option selected>Movimiento</option>
-            <option value="INGRESO">INGRESO</option>
-            <option value="EGRESO">EGRESO</option>
-          </select>
-          <label for="typeSelect">Tipo</label>
-        </div>
+  <!--***** TYPE MOVEMENTS *****-->
+  <div class="row mb-3">
+    <div class="col-12 pe-0">
+      <div class="form-floating">
+        <select
+          [(ngModel)]="movement.type"
+          class="form-select"
+          id="typeSelect"
+          name="typeMovement"
+          required>
+          <option selected>Movimiento</option>
+          <option value="INGRESO">INGRESO</option>
+          <option value="EGRESO">EGRESO</option>
+        </select>
+        <label for="typeSelect">Tipo</label>
       </div>
     </div>
+  </div>
 
 
-    <!--***** Description *****-->
-    <div class="form-floating mb-3">
-      <input
-        [(ngModel)]="movement.description"
-        class="form-control"
-        id="descriptionInput"
-        name="description"
-        placeholder="Descripción"
-        required
-        type="text">
-      <label for="descriptionInput">Descripción</label>
-    </div>
+  <!--***** Description *****-->
+  <div class="form-floating mb-3">
+    <input
+      [(ngModel)]="movement.description"
+      class="form-control"
+      id="descriptionInput"
+      name="description"
+      placeholder="Descripción"
+      required
+      type="text">
+    <label for="descriptionInput">Descripción</label>
+  </div>
 
-    <!--***** Amount and Payment Method *****-->
-    <div class="row mb-3">
-      <div class="col-5 pe-0">
-        <!-- amount -->
-        <div class="form-floating">
-          <input
-            [(ngModel)]="movement.amount"
-            class="form-control"
-            id="amountInput"
-            name="amount"
-            placeholder="Monto S/."
-            required
-            type="number">
-          <label for="amountInput">Monto S/.</label>
-        </div>
-      </div>
-      <div class="col-7">
-        <!-- payment method -->
-        <div class="form-floating">
-          <select
-            [(ngModel)]="movement.paymentMethod"
-            class="form-select"
-            id="paymentSelect"
-            name="paymentMethod"
-            required>
-            <option selected>Seleccionar</option>
-            <option value="EFECTIVO">EFECTIVO</option>
-            <option value="YAPE">YAPE</option>
-            <option value="TARJETA">TARJETA</option>
-            <option value="TRANSFERENCIA">TRANSFERENCIA</option>
-          </select>
-          <label for="paymentSelect">Medio de Pago</label>
-        </div>
+  <!--***** Amount and Payment Method *****-->
+  <div class="row mb-3">
+    <div class="col-5 pe-0">
+      <!-- amount -->
+      <div class="form-floating">
+        <input
+          [(ngModel)]="movement.amount"
+          class="form-control"
+          id="amountInput"
+          name="amount"
+          placeholder="Monto S/."
+          required
+          type="number">
+        <label for="amountInput">Monto S/.</label>
       </div>
     </div>
+    <div class="col-7">
+      <!-- payment method -->
+      <div class="form-floating">
+        <select
+          [(ngModel)]="movement.paymentMethod"
+          class="form-select"
+          id="paymentSelect"
+          name="paymentMethod"
+          required>
+          <option selected>Seleccionar</option>
+          <option value="EFECTIVO">EFECTIVO</option>
+          <option value="YAPE">YAPE</option>
+          <option value="TARJETA">TARJETA</option>
+          <option value="TRANSFERENCIA">TRANSFERENCIA</option>
+        </select>
+        <label for="paymentSelect">Medio de Pago</label>
+      </div>
+    </div>
+  </div>
 
-    <!--***** comments *****-->
-    <div class="form-floating mb-3">
+  <!--***** comments *****-->
+  <div class="form-floating mb-3">
     <textarea
       [(ngModel)]="movement.comments"
       class="form-control"
@@ -100,29 +92,28 @@
       required
       style="height: 80px">
     </textarea>
-      <label for="commentsInput">Observaciones</label>
-    </div>
+    <label for="commentsInput">Observaciones</label>
+  </div>
 
-    <!--***** Receipt image *****-->
-    <div class="row">
-      <div class="col-8 text-center">
-        <img [src]="[movement.receiptUrl]" alt="" height="140px">
-        <p class="text-muted">Foto comprobante</p>
+  <!--***** Receipt image *****-->
+  <div class="row">
+    <div class="col-8 text-center">
+      <img [src]="[movement.receiptUrl]" alt="" height="140px">
+      <p class="text-muted">Foto comprobante</p>
+    </div>
+    <div class="col-4 text-center">
+      <div>
+        <button class="btn btn-light p-3" type="button">
+          <i class="fa-solid fa-camera fa-2xl"></i>
+        </button>
+        <p class="small">Tomar foto</p>
       </div>
-      <div class="col-4 text-center">
-        <div>
-          <button class="btn btn-light p-3" type="button">
-            <i class="fa-solid fa-camera fa-2xl"></i>
-          </button>
-          <p class="small">Tomar foto</p>
-        </div>
-        <div>
-          <button class="btn btn-light p-3" type="button">
-            <i class="fa-solid fa-folder-open fa-2xl"></i>
-          </button>
-          <p class="small">Subir imagen</p>
-        </div>
+      <div>
+        <button class="btn btn-light p-3" type="button">
+          <i class="fa-solid fa-folder-open fa-2xl"></i>
+        </button>
+        <p class="small">Subir imagen</p>
       </div>
     </div>
-  </form>
-</div>
+  </div>
+</form>

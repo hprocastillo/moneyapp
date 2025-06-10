@@ -1,64 +1,93 @@
-<!--***** header *****-->
-<div *ngIf="movement">
-  <div class="row mb-4">
-    <div class="col-1">
-      <i (click)="location.back()" class="fa-solid fa-chevron-left"></i>
-    </div>
-    <div class="col-7">
-      <h5 class="text-uppercase">detalle</h5>
-    </div>
-    <div class="col-4 text-end">
-      <button (click)="router.navigate(['/movements/edit',movement.id])" class="btn btn-secondary btn-sm me-2"
-              type="button">
-        <i class="fa-solid fa-pen-to-square"></i>
-      </button>
-      <button class="btn btn-danger btn-sm" type="button">
-        <i class="fa-solid fa-trash"></i>
-      </button>
-    </div>
+<!--***** HEADER *****-->
+<div class="row border-bottom mb-2 pb-2">
+  <div class="col-1">
+    <i (click)="location.back()" class="fa-solid fa-arrow-left-long fa-lg"></i>
   </div>
+  <div class="col-9 text-center">
+    <h5>Detalle</h5>
+  </div>
+</div>
 
-  <!--***** Movements Detail *****-->
-  <div class="row mb-3">
-    <div class="col-12 text-start">
+<!-- DETAIL -->
+<ul class="list-group list-group-flush">
+  <li class="list-group-item d-flex justify-content-between  border-0">
+    <div class="text-start">
       <p class="text-muted small mb-0">Tipo movimiento</p>
       <p class="fw-medium mb-0">{{ movement.type }}</p>
     </div>
-  </div>
 
-  <div class="row mb-3">
-    <div class="col-6 text-start">
-      <p class="text-muted small mb-0">Monto</p>
-      <p class="fw-medium mb-0">S/. {{ movement.amount |number:"1.1-2" }}</p>
+    <div class="text-end">
+      <p class="text-muted small mb-0">Fecha:</p>
+      <p *ngIf="movement.createdAt" class="fw-medium mb-0">{{ movement.createdAt.toDate() | date:'short' }}</p>
     </div>
-    <div class="col-6 text-end">
+  </li>
+  <li class="list-group-item d-flex justify-content-between border-0">
+    <div class="text-start">
       <p class="text-muted small mb-0">Medio de pago</p>
       <p class="fw-medium mb-0">{{ movement.paymentMethod }}</p>
     </div>
-  </div>
 
-  <div class="row mb-3">
-    <div class="col-6 text-start">
+    <div class="text-end">
+      <p class="text-muted small mb-0">Registrado por</p>
+      <p class="fw-medium mb-0">{{ movement.createdByName }}</p>
+    </div>
+  </li>
+
+  <li class="list-group-item d-flex justify-content-between border-0">
+    <div class="text-start">
       <p class="text-muted small mb-0">Descripción</p>
       <p class="fw-medium mb-0">{{ movement.description }}</p>
     </div>
-    <div class="col-6 text-end">
-      <p class="text-muted small mb-0">Observaciones</p>
-      <p class="fw-medium mb-0">{{ movement.comments }}</p>
-    </div>
-  </div>
 
-  <div class="row mb-5">
-    <div class="col-12">
-      <p class="text-muted small mb-0">Fecha</p>
-      <p class="fw-medium mb-0">{{ movement.createdAt }}</p>
+    <div class="text-end">
+      <p class="text-muted small mb-0">Monto</p>
+      <p class="fw-medium mb-0">S/. {{ movement.amount |number:"1.1-2" }}</p>
     </div>
-  </div>
+  </li>
 
-  <div class="row">
-    <div class="col-12 text-center">
-      <img [src]="[movement.receiptUrl]" alt="" height="150px">
-      <p class="text-muted">Foto comprobante</p>
-    </div>
+  <li class="list-group-item border-0">
+    <p class="text-muted small mb-0">Observaciones</p>
+    <p class="fw-medium mb-0">{{ movement.comments }}</p>
+
+  </li>
+
+  <li class="list-group-item border-0 text-center">
+    <p *ngIf="!movement.receiptUrl" class="text-muted fst-italic">*No se adjunto comprobante</p>
+    <p *ngIf="movement.receiptUrl" class="text-muted">Foto comprobante</p>
+    <img [src]="[movement.receiptUrl]" alt="" height="150px">
+  </li>
+</ul>
+
+
+<!--****** FOOTER ******-->
+<div class="row fixed-bottom bg-white p-3">
+  <div class="d-flex justify-content-between">
+
+    <button
+      type="button"
+      class="btn btn-outline-primary me-1"
+      (click)="router.navigate(['movements/edit/', movement.id])"
+    >
+      <i class="fa-solid fa-pen-to-square me-1"></i>
+      <span style="font-size: 0.8rem">Editar</span>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-outline-danger me-1"
+      (click)="router.navigate(['groups/list'])"
+    >
+      <i class="fa-solid fa-trash me-1"></i>
+      <span style="font-size: 0.8rem">Borrar</span>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="router.navigate(['share'])"
+    >
+      <i class="fa-solid fa-share-from-square me-1"></i>
+      <span style="font-size: 0.8rem">Compartir</span>
+    </button>
   </div>
 </div>

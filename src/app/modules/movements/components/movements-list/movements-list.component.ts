@@ -1,16 +1,16 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import {CurrencyPipe, DatePipe, DecimalPipe, Location, NgClass, NgForOf} from '@angular/common';
-import {FooterComponent} from '../../../../shared/components/footer/footer.component';
+import {DatePipe, DecimalPipe, Location, NgForOf, NgIf} from '@angular/common';
 import {GroupedMovements, Movement} from '../../interfaces/movement';
 import {MovementsService} from '../../movements.service';
 import {format} from 'date-fns';
 import {es} from 'date-fns/locale';
+import {FooterComponent} from '../../../../shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-movements-list',
-  imports: [FormsModule, FooterComponent, DatePipe, NgForOf, NgClass, CurrencyPipe, DecimalPipe,],
+  imports: [FormsModule, DatePipe, NgForOf, DecimalPipe, NgIf, FooterComponent],
   templateUrl: './movements-list.component.html',
   styleUrl: './movements-list.component.scss'
 })
@@ -53,7 +53,7 @@ export class MovementsListComponent implements OnInit {
     for (const movement of movements) {
       const date: Date = this.toJsDate(movement.createdAt);
       const year = date.getFullYear();
-      let label = format(date, 'MMMM', { locale: es });
+      let label = format(date, 'MMMM', {locale: es});
       label = label.charAt(0).toUpperCase() + label.slice(1);
       if (year !== now.getFullYear()) {
         label += ` ${year}`;
